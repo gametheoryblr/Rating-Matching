@@ -1,5 +1,15 @@
 from ..player import Player
 
+def parse_score(score:str):
+    sc = []
+    for st in score.split(' '):
+        sc.append([0,0])
+        idx = 0
+        for pt in st.split('-'):
+            sc[-1][idx] = int(pt)
+            idx+=1
+    return sc
+
 def get_rating(score:list):
     winner = 0
     score_p0 = 0
@@ -14,18 +24,16 @@ def get_rating(score:list):
             score_p0 = 10*st[0]
     if winner >= 2:
         winner = 0
+        score_p0 += 200 
     else:
         winner = 1
+        score_p1 += 200
     if len(score) == 2:
         if winner == 0:
             score_p0 += 140
         else:
             score_p1 += 140
     return (score_p0,score_p1)
-
-
-def parse_score(score:str):
-    pass
 
 
 class Tennis(Player):
