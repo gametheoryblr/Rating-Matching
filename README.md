@@ -14,3 +14,14 @@ Following which, the system will train on the dataset and prompt the name of the
 ***
 
 
+# Glicko Testing
+1. Make a new Player object.
+2. Assign it Rating and RD using the respective class-methods from the stored values.
+3. Update the player's Rating and RD.
+4. Store the updated values.
+
+# Glicko Testing
+1. Make a new Player object.
+2. Assign it Rating and RD using the respective class-methods from the stored values.
+3. Update the player's Rating and RD.
+4. Store the updated values.
