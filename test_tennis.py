@@ -4,6 +4,8 @@ import sys
 # library imports 
 import pandas as pd 
 import matplotlib.pyplot as plt
+import json
+from datetime import datetime
 
 # codebase imports 
 from src.util.tennis.rating import Tennis as Player,get_rating
@@ -32,12 +34,14 @@ def load_data(fname):
     dataset = pd.DataFrame.from_dict(md)
     return dataset
 
-def evaluateData(dataset):
+def evaluateData(dataset,rformat='matchwise'):
     players = {}
     prat = {}
     plerr = {}
+    plerr_time = {}
     eloObj = Elo()
     name_id = {}
+    prat_time = {}
     for i in range(dataset.shape[0]):
         pdone = int(100*i/dataset.shape[0])
         print('\r',pdone,end=' ')
@@ -49,11 +53,15 @@ def evaluateData(dataset):
         if mtch['winner_name'] not in players.keys():
             players[mtch['winner_name']] = Player(mtch['winner_id'],mtch['winner_name'])
             prat[mtch['winner_name']] = [1500]
+            prat_time[mtch['winner_name']] = {}
             plerr[mtch['winner_name']] = [0]
+            plerr_time[mtch['winner_name']] = {}
         if mtch['loser_name'] not in players.keys():
             players[mtch['loser_name']] = Player(mtch['loser_id'],mtch['loser_name'])
             prat[mtch['loser_name']] = [1500]
+            prat_time[mtch['loser_name']] = {}
             plerr[mtch['loser_name']] = [0]
+            plerr_time[mtch['loser_name']] = {}
         
         # difference in timing...
         dscore = date_parser(mtch['tourney_date'])
@@ -80,6 +88,8 @@ def evaluateData(dataset):
 
         plerr[mtch['loser_name']].append(abs(pred - loser_stat))        # might need to change this 
         plerr[mtch['winner_name']].append(abs(1 - pred - winner_stat))  # might need to change this 
+        plerr_time[mtch['loser_name']][mtch['tourney_date']] = abs(pred - loser_stat)
+        plerr_time[mtch['winner_name']][mtch['tourney_date']] = abs(1 - pred - winner_stat)
 
         players[mtch['winner_name']].rating = eloObj.elo_rate(players[mtch['winner_name']].rating,delta,winner_stat,k_winner)
         players[mtch['winner_name']].wins +=1 
@@ -87,72 +97,130 @@ def evaluateData(dataset):
         players[mtch['loser_name']].lose += 1
         prat[mtch['loser_name']].append(players[mtch['loser_name']].rating)
         prat[mtch['winner_name']].append(players[mtch['winner_name']].rating)
+        prat_time[mtch['loser_name']][mtch['tourney_date']] = players[mtch['loser_name']].rating
+        prat_time[mtch['winner_name']][mtch['tourney_date']] = players[mtch['winner_name']].rating
+    if rformat == 'matchwise': 
+        return prat, players, plerr
+    elif rformat == 'datewise':
+        return prat_time,players,plerr_time
+    else:
+        print('ERROR: Invalid return format.')
+        exit(1)
 
-    return prat, players, plerr
-
-def display_results(ppl:list,players:dict,prat:dict,plerr:dict):
+def display_results(ppl,players,prat,plerr,rformat='matchwise',fname="DF"):
     # print(ppl)
     for i in ppl:
         print(i,players[i].wins,players[i].lose)
-        plt.plot(range(len(prat[i])),prat[i],label=i)
+        if rformat == 'matchwise':
+            plt.plot(range(len(prat[i])),prat[i],label=i)
+        elif rformat== 'datewise':
+            plt.plot(list(prat[i].keys()),list(prat[i].values()),label=i)
+        else:
+            print('Error: Invalid plotting format')
+            exit(1)
     plt.title('Change in Elo Rating with time')
     plt.xlabel('Number of Matches')
     plt.ylabel('Elo-Rating')
     plt.legend()
-    plt.show()
+    plt.savefig('./plots/EloChange_'+fname+datetime.now().strftime('%Y_%b_%d_%H_%M_%S'))
+    plt.close()
     # cumulative error 
-    for i in ppl:
-        # plotPlayer(i)
-        nmat = []
-        for x in plerr[i]:
-            if len(nmat) == 0:
-                nmat.append(x)
-            else:
-                nmat.append((x+nmat[-1]*len(nmat))/(len(nmat) + 1))
-        plt.plot(range(len(nmat)),nmat,label=i)
+    
+    if rformat == 'matchwise':
+        for i in ppl:
+            # plotPlayer(i)
+            nmat = []
+            for x in plerr[i]:
+                if len(nmat) == 0:
+                    nmat.append(x)
+                else:
+                    nmat.append((x+nmat[-1]*len(nmat))/(len(nmat) + 1))
+            plt.plot(range(len(nmat)),nmat,label=i)
+    elif rformat == 'datewise':
+        for i in ppl:
+            nmat = [] 
+            for x in plerr[i].keys():
+                if len(nmat) == 0:
+                    nmat.append(0)
+                else:
+                    nmat.append((plerr[i][x] + nmat[-1]*len(nmat))/(len(nmat) + 1))
+            plt.plot(plerr[i].keys(),nmat,label=i)
+    else:
+        print('Invalid format')
+        exit(1)
     plt.title('Cumulative Error')
     plt.xlabel('Matches')
     plt.ylabel('Error')
     plt.legend()
-    plt.show()
+    plt.savefig('./plots/CumulativeError_'+fname+datetime.now().strftime('%Y_%b_%d_%H_%M_%S'))
+    plt.close()
 
 
     # window error  
     window_size = 15 
-    for i in ppl:
-        # plotPlayer(i)
-        nmat = []
-        for x in range(len(plerr[i])):
-            if x < window_size:
-                y = 0
-                ans = 0
-                while y <= x:
-                    ans += plerr[i][y]
-                    y += 1
-                nmat.append(ans)
-            else:
+    if rformat == 'matchwise':
+        for i in ppl:
+            # plotPlayer(i)
+            nmat = []
+            for x in range(len(plerr[i])):
+                if x < window_size:
+                    y = 0
+                    ans = 0
+                    while y <= x:
+                        ans += plerr[i][y]
+                        y += 1
+                    nmat.append(ans)
+                else:
+                    ans = 0
+                    y = 0 
+                    while y < window_size:
+                        y += 1
+                        ans += plerr[i][x - y]
+                    nmat.append(ans)
+            plt.plot(range(len(nmat)),nmat,label=i)
+    elif rformat == 'datewise':
+        for i in ppl:
+            nmat = [] 
+            itlist = plerr[i].keys()
+            for x in range(len(itlist)):
                 ans = 0
                 y = 0 
-                while y < window_size:
-                    y += 1
-                    ans += plerr[i][x - y]
+                if x < window_size:
+                    while y <= x:
+                        ans += plerr[i][itlist[y]]
+                        y += 1
+                else:
+                    while y < window_size:
+                        y += 1
+                        ans += plerr[i][itlist[x-y]]
                 nmat.append(ans)
-        plt.plot(range(len(nmat)),nmat,label=i)
+            plt.plot(itlist,nmat,label='i')    
+    else:
+        print('Error: Invalid format')
+        exit(1)
     plt.title('Window Error')
     plt.xlabel('Matches')
     plt.ylabel('Error')
     plt.legend()
-    plt.show()
-
-
-
-
+    plt.savefig('./plots/WindowError_'+fname+datetime.now().strftime('%Y_%b_%d_%H_%M_%S'))
+    plt.close()
 
 if __name__ == '__main__':
     # fname = input('Enter Dataset Filename')
     fname = sys.argv[1]
+    dformat = sys.argv[2]
+    assert(dformat in ['datewise','matchwise'])
     dataset = load_data(fname)
-    prat, players,plerr = evaluateData(dataset)
+    prat, players,plerr = evaluateData(dataset,dformat)
+    if len(sys.argv) == 4: # input file 
+        try:
+            input_set = json.load(open(sys.argv[3],'r'))['input']
+            display_results(input_set,players,prat,plerr,dformat)
+            exit(0)
+        except Exception as e:
+            print('Error: Invalid file or input format. Please input list through a json file.')
+            print(e)
+            exit(1)        
     for i in players.keys():
         print(i)
     while True:
@@ -160,4 +228,4 @@ if __name__ == '__main__':
         print('Displaying information about ',instr)
         if instr == 'X' or instr == 'x':
             break
-        display_results([instr],players,prat,plerr)
+        display_results([instr],players,prat,plerr,dformat)
