@@ -6,9 +6,9 @@ Implementation of Rating and Player matching algorithm
 We make available ATP dataset of matches from `1968-2022`. This can be used for training the rating system and viewing the results (cumulative loss, windowed error and ratings with matches) for different players in `A-level` tournaments by using the following command in the root directory of the repo. 
 
 ```sh
-$ python3 test_tennis.py ./dataset/atp_matches_till_2022.csv
+$ python3 test_tennis.py ./dataset/atp_matches_till_2022.csv [datewise/matchwise] [OPTIONAL:file input]
 ```
-
+> Example: `$ python3 test_tennis.py dataset/atp_matches_till_2022.csv datewise inputs/in1.json`
 Following which, the system will train on the dataset and prompt the name of the player to display the corresponding plots. To exit, press `X`.
 
 ***
