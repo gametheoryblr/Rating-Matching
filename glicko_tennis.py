@@ -20,8 +20,9 @@ def load_data(fname):
     matches = pd.read_csv(fname)
     # filter dataset 
     matches = matches[['tourney_id', 'tourney_name', 'surface', 'draw_size', 'tourney_level', 'tourney_date', 'match_num', 'winner_id', 'winner_name','loser_id', 'loser_name', 'score', 'best_of', 'round']]
-    matches = matches[matches["tourney_level"]=='A']
-    
+    # filter dataframe where tourney_date is between 2014 and 2016
+    matches = matches[matches["tourney_date"]>=20150000]
+    matches = matches[matches["tourney_date"]<=20160000]
     return matches
 
 def evaluateData(matches,p_ids):
