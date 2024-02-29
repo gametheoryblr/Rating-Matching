@@ -20,6 +20,14 @@ $ python3 glicko_tennis.py ./dataset/atp_matches_till_2022.csv [datewise] [input
 ```
 > Example: `$ python3 glicko_tennis.py dataset/atp_matches_till_2022.csv datewise inputs/in1.json`
 
+### Squash
+
+#### Glicko
+```sh
+$ python3 glicko_squash.py ./dataset/squash_dataset.py [datewise] [input_file]
+```
+> Example: `$ python3 glicko_squash.py dataset/squash_dataset.csv datewise inputs/squash_in1.json`
+
 ***
 # Glicko Testing
 1. Make a new Player object.
