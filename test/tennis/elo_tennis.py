@@ -181,7 +181,7 @@ def display_results(ppl,players,prat,plerr,rformat='matchwise',fname="DF"):
     elif rformat == 'datewise':
         for i in ppl:
             nmat = [] 
-            itlist = plerr[i].keys()
+            itlist = list(plerr[i].keys())
             for x in range(len(itlist)):
                 ans = 0
                 y = 0 

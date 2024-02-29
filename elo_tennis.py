@@ -181,7 +181,7 @@ def display_results(ppl,players,prat,plerr,rformat='matchwise',fname="DF"):
     elif rformat == 'datewise':
         for i in ppl:
             nmat = [] 
-            itlist = plerr[i].keys()
+            itlist = list(plerr[i].keys())
             for x in range(len(itlist)):
                 ans = 0
                 y = 0 
@@ -209,12 +209,13 @@ if __name__ == '__main__':
     # fname = input('Enter Dataset Filename')
     fname = sys.argv[1]
     dformat = sys.argv[2]
+    print(dformat)
     assert(dformat in ['datewise','matchwise'])
     dataset = load_data(fname)
     prat, players,plerr = evaluateData(dataset,dformat)
     if len(sys.argv) == 4: # input file 
         try:
-            input_set = json.load(open(sys.argv[3],'r'))['input']
+            input_set = list(json.load(open(sys.argv[3],'r'))['inputs'])
             display_results(input_set,players,prat,plerr,dformat)
             exit(0)
         except Exception as e:
