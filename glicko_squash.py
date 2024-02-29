@@ -15,6 +15,7 @@ from tqdm import tqdm
 
 # codebase imports 
 from src.Glicko2.glicko2 import Player
+from src.util.squash.score_sigmoid import score_sigmoid
 
 #load files 
 def load_data(fname):
@@ -34,7 +35,7 @@ def evaluateData(matches,p_ids):
     for ind,row in tqdm(matches.iterrows(), total=len(matches), desc="Processing matches"):
         p1_id = row["usr_id"]
         p2_id = row["oppnt_id"]
-            
+        scoreline = row['score']    
         for player_id in [p1_id, p2_id]:
             if player_id not in player_ratings:
                 player_ratings[player_id] = {"Rating": 1500, "RD": 200}
@@ -44,20 +45,21 @@ def evaluateData(matches,p_ids):
         p2_rating = player_ratings[p2_id]['Rating']
         p2_rd = player_ratings[p2_id]['RD']
         
-        #setting up Winner
+        #setting up p1
         p1 = Player()
         p1.setRating(player_ratings[p1_id]['Rating'])
         p1.setRd(    player_ratings[p1_id]['RD'])
         
-        #Setting up Loser
+        #Setting up p2
         p2 = Player()
         p2.setRating(player_ratings[p2_id]['Rating'])
         p2.setRd(player_ratings[p2_id]['RD'])
         
+        oc1,oc2 = score_sigmoid(scoreline) 
         if row['result']=='W':
-            oc = 1
+            oc = max(oc1,oc2)
         elif row['result']=='L':
-            oc = 0
+            oc = min(oc1,oc2)
         else:
             oc = 0.5
 
