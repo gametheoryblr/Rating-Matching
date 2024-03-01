@@ -16,20 +16,25 @@ from tqdm import tqdm
 # codebase imports 
 from src.Glicko2.glicko2 import Player
 from src.util.squash.score_sigmoid import score_sigmoid
+from src.util.squash.date_parser import date_parser
 
 #load files 
 def load_data(fname):
     matches = pd.read_csv(fname)
+    for ind,row in matches.iterrows():
+        matches.at[ind,'date_time'] = int(date_parser(row['date_time']))
+        
     #sort this dataframe based on column date_time
-    matches = matches.sort_values(by=['date_time'])
-
-    #filter
-
+    matches = matches.sort_values(by='date_time')
+    #filter matches such that result column is not equal to 'D'
+    matches = matches[matches['result']!='D']
 
     return matches
 
 def evaluateData(matches,p_ids):
-
+    # print(matches.shape)
+    # #print first few entries in the date_time column of matches
+    dfs_to_concat = []
     df = pd.DataFrame()
     player_ratings = {}
     for ind,row in tqdm(matches.iterrows(), total=len(matches), desc="Processing matches"):
@@ -73,24 +78,31 @@ def evaluateData(matches,p_ids):
 
 
         if row['usr_id'] in p_ids:
-            #append to df with columns: player updated rating, prediction, player_id,tourney_date 
-            df = df.append({'player_id':row['usr_id'], 'player_rating': player_ratings[p1_id]['Rating'], 'tourney_date': row['date_time']}, ignore_index=True)
+            # Create a dataframe with the required data
+            player_df = pd.DataFrame({'player_id': [row['usr_id']], 'player_rating': [player_ratings[row['usr_id']]['Rating']], 'tourney_date': [row['date_time']]})
+            # Append the dataframe to the list
+            dfs_to_concat.append(player_df)
 
         if row['oppnt_id'] in p_ids:
-            #append to df with columns: player updated rating, prediction, player_id,tourney_date 
-            df = df.append({'player_id':row['oppnt_id'],  'player_rating': player_ratings[p2_id]['Rating'], 'tourney_date': row['date_time']}, ignore_index=True)
+            # Create a dataframe with the required data
+            player_df = pd.DataFrame({'player_id': [row['oppnt_id']], 'player_rating': [player_ratings[row['oppnt_id']]['Rating']], 'tourney_date': [row['date_time']]})
+            # Append the dataframe to the list
+            dfs_to_concat.append(player_df)
 
-    return df
+    # Concatenate all dataframes in the list
+    if dfs_to_concat:
+        df = pd.concat(dfs_to_concat, ignore_index=True)
+        return df
 
 def display_results(dataset):
     df = dataset
     grouped = df.groupby('player_id')
 
     for player_name, group_df in grouped:
-        plt.plot( group_df['player_rating'], label=f'Player {player_name}')
+        plt.plot( group_df['tourney_date'],group_df['player_rating'], label=f'Player {player_name}')
 
     # Add labels and title
-    plt.xlabel('Ranking with matches')
+    plt.xlabel('Ranking with date')
     plt.ylabel('Player Rating')
     plt.title('Player Rating Over Time')
     plt.legend()  # Add legend to distinguish between player IDs
@@ -122,7 +134,7 @@ if __name__ == '__main__':
             print(e)
             exit(1)   
     else:
-        print("Glicko needs input. Please input list through a json file.")
+        print("Glicko needs input file. Please input list through a json file.")
         exit(1)
 
     preds = evaluateData(dataset,input_set)
