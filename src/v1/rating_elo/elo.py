@@ -29,7 +29,7 @@ class Elo:
         return old_ratings + self.k*time_k*(result - ea)
 
     def elo_rate(self,old_ratings,delta,result,time=1):
-        if old_ratings > 2400:
+        if old_ratings > 2000:
             self.k = 4 
         else:
             self.k = 8

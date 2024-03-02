@@ -6,7 +6,7 @@ def parse_score(score:str):
         sc.append([0,0])
         idx = 0
         for pt in st.split('-'):
-            sc[-1][idx] = int(pt)
+            sc[-1][idx] = int(pt.split('(')[0])
             idx+=1
     return sc
 
@@ -14,21 +14,25 @@ def get_rating(score:list):
     winner = 0
     score_p0 = 0
     score_p1 = 0
+    w0 = 0
+    w1 = 0
     for st in score:
         if st[0] > st[1]:
             winner += 1
-            score_p0 = 130 - (10*st[1])
-            score_p1 = 10*st[1]
+            w0 += 1
+            score_p0 += 130*st[0]/(st[0] + st[1])
+            score_p1 += 130*st[1]/(st[0] + st[1])
         else:
-            score_p1 = 130 - (10*st[0])
-            score_p0 = 10*st[0]
-    if winner >= 2:
+            w1 += 1
+            score_p1 = 130*st[1]/(st[0] + st[1])
+            score_p0 = 130*st[0]/(st[0] + st[1])
+    if winner > len(score)/2:
         winner = 0
         score_p0 += 200 
     else:
         winner = 1
         score_p1 += 200
-    if len(score) == 2:
+    if abs(w0-w1) >= 2:
         if winner == 0:
             score_p0 += 140
         else:
