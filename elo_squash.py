@@ -88,10 +88,9 @@ def plotPlayerRatings(names,prat,PLOT,arguments):
         else:
             plt.plot(range(len(list(prat[name].keys()))),prat[name].values(),label=name)
         return
+    for z in names:
+        plotPlayer(z)
 
-    plotPlayer(names[0])
-    plotPlayer(names[1])
-    plotPlayer(names[2])
     plt.legend()
     if PLOT == 'datewise':
         plt.xlabel('Dates')
@@ -173,6 +172,11 @@ def plotWindowError(ppl,plerr,PLOT,arguments):
         plt.savefig(arguments.output+datetime.datetime.now().strftime("%y_%m_%d_%H_%M")+'.png')
         plt.close()
 
+
+
+
+
+
 if __name__ == '__main__':
     '''
         Arguments:
@@ -193,6 +197,8 @@ if __name__ == '__main__':
     plerr = {}
     eloObj = Elo()
     name_id = {}
+    graph = {}
+
     if arguments.debug:
         print('Dataset Shape',dataset.shape[0])
     for i in range(dataset.shape[0]):
@@ -201,13 +207,14 @@ if __name__ == '__main__':
         mtch = dataset.loc[i]
         if mtch['result'] not in ['W']: # ignore draws....(losses are just repeated datapoints)
             continue
-
         name_id[mtch['usr_id']] = mtch['usr_id'] # TODO: change this line @Varul 
         if mtch['usr_id'] not in players.keys():
+            graph[int(mtch['usr_id'])] = []
             players[mtch['usr_id']] = Player(mtch['usr_id'],mtch['usr_id'])
             prat[mtch['usr_id']] = {}
             plerr[mtch['usr_id']] = [0]
         if mtch['oppnt_id'] not in players.keys():
+            graph[int(mtch['oppnt_id'])] = []
             players[mtch['oppnt_id']] = Player(mtch['oppnt_id'],mtch['oppnt_id'])
             prat[mtch['oppnt_id']] = {}
             plerr[mtch['oppnt_id']] = [0]
@@ -242,7 +249,8 @@ if __name__ == '__main__':
         loser_stat = 1 - winner_stat
 
         #UPDATE SCORES HERE 
-        
+        graph[int(mtch['usr_id'])].append(int(mtch['oppnt_id']))
+        graph[int(mtch['oppnt_id'])].append(int(mtch['usr_id']))
         
         plerr[mtch['oppnt_id']].append(abs(pred - loser_stat))        # loss for opponent
         plerr[mtch['usr_id']].append(abs(1 - pred - winner_stat))  # loss for winner 
@@ -259,6 +267,46 @@ if __name__ == '__main__':
         #TODO:Add time-based updates here...
     print()
     print('Done training on data')    
+    # for i in graph.keys():
+    #     for j in graph[i]:
+    #         print(i,j,file=fpt)
+    fpt = open('./op.json','w')
+    print(graph,file=fpt)
+    # fpt.write(json.dumps(graph))
+    fpt.close()
+    colors = {}
+    ccolor = 0
+    colors[0] = []
+    allocated_color = {}
+    for i in graph.keys():
+        allocated_color[int(i)] = -1
+
+    def dfs(parent,node,color,verbose=False):
+        global allocated_color
+        global graph
+        global colors
+        if verbose:
+            print(node,sep=' ')
+        if color == 17:
+            print(node)
+        allocated_color[int(node)] = color
+        colors[color].append(node)
+        for child in graph[node]:
+            if parent != child and allocated_color[node] == -1:
+                dfs(node,child,color,verbose)
+
+
+    for i in graph.keys():
+        if allocated_color[int(i)] == -1:
+            dfs(-1,i,ccolor)
+            ccolor += 1
+            colors[ccolor] = []
+        else:
+            print('not allocating to',i)
+    print(allocated_color[3300])
+    dfs(-1,3300,17,True)
+    print()
+
     ''' 
     Name mapping can't be done as there are some issues in linking 
     def mapNames(filename):
