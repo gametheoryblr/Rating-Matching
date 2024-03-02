@@ -34,7 +34,7 @@ def load_data(fname):
     dataset = pd.DataFrame.from_dict(md)
     return dataset
 
-def evaluateData(dataset,rformat='matchwise'):
+def evaluateData(dataset,rformat='matchwise',begin_date=0,end_date=99999999):
     players = {}
     prat = {}
     plerr = {}
@@ -47,7 +47,7 @@ def evaluateData(dataset,rformat='matchwise'):
         print('\r',pdone,end=' ')
         print('\r[',pdone*'=',(100-pdone)*'-',']',pdone,'\%',sep='',end='')
         mtch = dataset.loc[i]
-        if mtch['tourney_level'] != 'A':
+        if mtch['tourney_date'] < begin_date or mtch['tourney_date'] > end_date:
             continue
         name_id[mtch['winner_name']] = mtch['winner_id']
         if mtch['winner_name'] not in players.keys():
@@ -91,7 +91,7 @@ def evaluateData(dataset,rformat='matchwise'):
         plerr_time[mtch['loser_name']][mtch['tourney_date']] = abs(pred - loser_stat)
         plerr_time[mtch['winner_name']][mtch['tourney_date']] = abs(1 - pred - winner_stat)
 
-        players[mtch['winner_name']].rating = eloObj.elo_rate(players[mtch['winner_name']].rating,delta,winner_stat,k_winner)
+        players[mtch['winner_name']].rating = eloObj.elo_rate(players[mtch['winner_name']].rating,-1*delta,winner_stat,k_winner)
         players[mtch['winner_name']].wins +=1 
         players[mtch['loser_name']].rating = eloObj.elo_rate(players[mtch['loser_name']].rating,delta,loser_stat,k_loser)
         players[mtch['loser_name']].lose += 1
@@ -144,7 +144,7 @@ def display_results(ppl,players,prat,plerr,rformat='matchwise',fname="DF"):
                     nmat.append(0)
                 else:
                     nmat.append((plerr[i][x] + nmat[-1]*len(nmat))/(len(nmat) + 1))
-            plt.plot(plerr[i].keys(),nmat,label=i)
+            plt.plot(list(plerr[i].keys()),nmat,label=i)
     else:
         print('Invalid format')
         exit(1)
@@ -209,11 +209,23 @@ if __name__ == '__main__':
     # fname = input('Enter Dataset Filename')
     fname = sys.argv[1]
     dformat = sys.argv[2]
+    stdt = 0
+    endt = 99999999
+    if '-startdate' in sys.argv:
+        idx = 0
+        while sys.argv[idx] != '-startdate':
+            idx+=1
+        stdt = int(sys.argv[idx + 1])
+    if '-enddate' in sys.argv:
+        idx = 0
+        while sys.argv[idx] != '-enddate':
+            idx += 1
+        endt = int(sys.argv[idx + 1])
     print(dformat)
     assert(dformat in ['datewise','matchwise'])
     dataset = load_data(fname)
-    prat, players,plerr = evaluateData(dataset,dformat)
-    if len(sys.argv) == 4: # input file 
+    prat, players,plerr = evaluateData(dataset,dformat,stdt,endt)
+    if len(sys.argv) >= 4: # input file 
         try:
             input_set = list(json.load(open(sys.argv[3],'r'))['inputs'])
             display_results(input_set,players,prat,plerr,dformat)
