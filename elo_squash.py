@@ -3,8 +3,10 @@ import datetime
 import pandas as pd
 import matplotlib.pyplot as plt
 import json 
+
 from src.util.squash.rating import Squash as Player
 from src.v1.rating_elo.elo import Elo
+from src.util.arparse import parseArguments
 
 def parse_score(score:str):
     return json.loads(score)
@@ -75,98 +77,36 @@ def date_parser(date:str):
     return time_score
 
 
-dataset = clean_data('./dataset/squash_dataset.csv')
-players = {}
-prat = {}
-ptime = {}
-plerr = {}
-eloObj = Elo()
-name_id = {}
-print(dataset.shape[0])
-for i in range(dataset.shape[0]):
-    pdone = int(100*i/dataset.shape[0])
-    # print('\r',pdone,end=' ')
-    # print('\r[',pdone*'=',(100-pdone)*'-',']',pdone,'\%',sep='',end='')
-    mtch = dataset.loc[i]
-    if mtch['result'] != 'W' and mtch['result'] != 'D': # only win or draw (draws are repeated currently)
-        continue
-    name_id[mtch['usr_id']] = mtch['usr_id']
-    if mtch['usr_id'] not in players.keys():
-        players[mtch['usr_id']] = Player(mtch['usr_id'],mtch['usr_id'])
-        prat[mtch['usr_id']] = {}
-        plerr[mtch['usr_id']] = [0]
-    if mtch['oppnt_id'] not in players.keys():
-        players[mtch['oppnt_id']] = Player(mtch['oppnt_id'],mtch['oppnt_id'])
-        prat[mtch['oppnt_id']] = {}
-        plerr[mtch['oppnt_id']] = [0]
-    
-    # difference in timing...
-    dscore = date_parser(mtch['date_time'])
-    if players[mtch['oppnt_id']].last_match == -1:
-        players[mtch['oppnt_id']].last_match = dscore
-    if players[mtch['usr_id']].last_match == -1:
-        players[mtch['usr_id']].last_match = dscore
-    k_loser = dscore - players[mtch['oppnt_id']].last_match
-    k_winner = dscore - players[mtch['usr_id']].last_match
-    
-    players[mtch['oppnt_id']].updateTime(dscore)
-    players[mtch['usr_id']].updateTime(dscore)
-    delta = players[mtch['usr_id']].rating - players[mtch['oppnt_id']].rating
-    # predict result of the match 
-    pred = eloObj.predict(delta) # probability of a person with rating ``advantage`` DELTA winning?? 
-    try:
-        # get result of the match (statistically)
-        match_ratings = get_rating(parse_score(mtch['score']))
-    except Exception as e:
-        print("Skipped ",mtch,e)
-        continue
-    winner_stat = max(match_ratings[0],match_ratings[1])/(float(match_ratings[0]) + match_ratings[1])
-    loser_stat = 1 - winner_stat
 
-    plerr[mtch['oppnt_id']].append(abs(pred - loser_stat))        # might need to change this 
-    plerr[mtch['usr_id']].append(abs(1 - pred - winner_stat))  # might need to change this 
+def plotPlayerRatings(names,prat,PLOT,arguments):
+    def plotPlayer(name:str):
+        if name not in prat.keys():
+            print('ERROR: Name not found')
+            return 
+        if PLOT == 'datewise':
+            plt.plot(prat[name].keys(),prat[name].values(),label=name)
+        else:
+            plt.plot(range(len(list(prat[name].keys()))),prat[name].values(),label=name)
+        return
 
-    players[mtch['usr_id']].rating = eloObj.elo_rate(players[mtch['usr_id']].rating,-1*delta,winner_stat,k_winner)
-    players[mtch['usr_id']].wins +=1 
-    players[mtch['oppnt_id']].rating = eloObj.elo_rate(players[mtch['oppnt_id']].rating,delta,loser_stat,k_loser)
-    players[mtch['oppnt_id']].lose += 1
-    prat[mtch['oppnt_id']][dscore]  = players[mtch['oppnt_id']].rating
-    prat[mtch['usr_id']][dscore]  = players[mtch['usr_id']].rating
-    
-names = list(prat.keys())
-''' 
-Name mapping can't be done as there are some issues in linking 
-def mapNames(filename):
-    df = pd.read_csv(filename)
-    id2n_map = {}
-    for i in range(df.shape[0]):
-        entry = df.loc[i]
-        print(i,entry)
-        id2n_map[entry['cntct_id']] = entry['name']
-    return id2n_map
-
-name_mapping = mapNames('./dataset/squash_player_maps.csv')
-'''
-PLOT = 'matchwise'
-def plotPlayer(name:str):
-    if name not in prat.keys():
-        print('ERROR: Name not found')
-        return 
+    plotPlayer(names[0])
+    plotPlayer(names[1])
+    plotPlayer(names[2])
+    plt.legend()
     if PLOT == 'datewise':
-        plt.plot(prat[name].keys(),prat[name].values(),label=name)
+        plt.xlabel('Dates')
     else:
-        plt.plot(range(len(list(prat[name].keys()))),prat[name].values(),label=name)
-    # print(name,prat[name][-1])
-    # plt.savefig('./outputs/'+random.random()+'.png')
-    return
+        plt.xlabel('Matches')
+    plt.ylabel('Rating')
+    plt.title(f'Player Ratings {PLOT}')
+    if arguments.output == None:
+        plt.show()
+    else:
+        plt.savefig(arguments.output+datetime.datetime.now().strftime("%y_%m_%d_%H_%M")+'.png')
+        plt.close()
 
-plotPlayer(names[0])
-plotPlayer(names[1])
-plotPlayer(names[2])
-plt.legend()
-plt.savefig('./outputs/player_ratings'+datetime.datetime.now().strftime("%y_%m_%d_%H_%M")+'.png')
-plt.close()
 
+'''
 ppl = list(prat.keys())[:20]
 print(ppl)
 for i in ppl:
@@ -182,47 +122,164 @@ plt.ylabel('Elo-Rating')
 plt.legend()
 plt.savefig('./outputs/Rating_change'+datetime.datetime.now().strftime("%y_%m_%d_%H_%M")+'.png')
 plt.close()
+'''
 
-# cumulative error 
-for i in ppl:
-    # plotPlayer(i)
-    nmat = []
-    for x in plerr[i]:
-        if len(nmat) == 0:
-            nmat.append(x)
-        else:
-            nmat.append((x+nmat[-1]*len(nmat))/(len(nmat) + 1))
-    plt.plot(range(len(nmat)),nmat,label=i)
-plt.title('Cumulative Error')
-plt.legend()
-plt.savefig('./outputs/Cumulative_error'+datetime.datetime.now().strftime("%y_%m_%d_%H_%M")+'.png')
-plt.close()
+# cumulative error (@Varul make it for both date/matchwise)
+def plotCumulativeError(ppl,plerr,PLOT,arguments):
+    for i in ppl:
+        # plotPlayer(i)
+        nmat = []
+        for x in plerr[i]:
+            if len(nmat) == 0:
+                nmat.append(x)
+            else:
+                nmat.append((x+nmat[-1]*len(nmat))/(len(nmat) + 1))
+        plt.plot(range(len(nmat)),nmat,label=i)
+    plt.title('Cumulative Error')
+    plt.legend()
+    if arguments.output == None:
+        plt.show()
+    else:
+        plt.savefig(arguments.output+datetime.datetime.now().strftime("%y_%m_%d_%H_%M")+'.png')
+        plt.close()
 
+def plotWindowError(ppl,plerr,PLOT,arguments):
+    # window error  
+    window_size = 15 
+    for i in ppl:
+        # plotPlayer(i)
+        nmat = []
+        for x in range(len(plerr[i])):
+            if x < window_size:
+                y = 0
+                ans = 0
+                while y <= x:
+                    ans += plerr[i][y]
+                    y += 1
+                nmat.append(ans)
+            else:
+                ans = 0
+                y = 0 
+                while y < window_size:
+                    y += 1
+                    ans += plerr[i][x - y]
+                nmat.append(ans)
+        plt.plot(range(len(nmat)),nmat,label=i)
+    plt.title('Window Error')
+    plt.legend()
+    if arguments.output == None:
+        plt.show()
+    else:
+        plt.savefig(arguments.output+datetime.datetime.now().strftime("%y_%m_%d_%H_%M")+'.png')
+        plt.close()
 
-# window error  
-window_size = 15 
-for i in ppl:
-    # plotPlayer(i)
-    nmat = []
-    for x in range(len(plerr[i])):
-        if x < window_size:
-            y = 0
-            ans = 0
-            while y <= x:
-                ans += plerr[i][y]
-                y += 1
-            nmat.append(ans)
-        else:
-            ans = 0
-            y = 0 
-            while y < window_size:
-                y += 1
-                ans += plerr[i][x - y]
-            nmat.append(ans)
-    plt.plot(range(len(nmat)),nmat,label=i)
-plt.title('Window Error')
-plt.legend()
-plt.savefig('./outputs/Window_Error'+datetime.datetime.now().strftime("%y_%m_%d_%H_%M")+'.png')
-plt.close()
+if __name__ == '__main__':
+    '''
+        Arguments:
+        [0] fname 
+        [--dataset] dataset name 
+        [--mapper] dataset name (for name mapping)
+        [--display] datewise/matchwise
+        [--debug] run in debug mode (default is false) 
+        [--output] output folder destination
+    '''
+    arguments = parseArguments(sys.argv)
+    dataset = clean_data(arguments.dataset)
 
+    # Initialize variables 
+    players = {}
+    prat = {}
+    ptime = {}
+    plerr = {}
+    eloObj = Elo()
+    name_id = {}
+    if arguments.debug:
+        print('Dataset Shape',dataset.shape[0])
+    for i in range(dataset.shape[0]):
+        pdone = int(100*i/dataset.shape[0])
+        print('\r[',pdone*'=',(100-pdone)*'-',']',pdone,'\%',sep='',end='')
+        mtch = dataset.loc[i]
+        if mtch['result'] not in ['W']: # ignore draws....(losses are just repeated datapoints)
+            continue
 
+        name_id[mtch['usr_id']] = mtch['usr_id'] # TODO: change this line @Varul 
+        if mtch['usr_id'] not in players.keys():
+            players[mtch['usr_id']] = Player(mtch['usr_id'],mtch['usr_id'])
+            prat[mtch['usr_id']] = {}
+            plerr[mtch['usr_id']] = [0]
+        if mtch['oppnt_id'] not in players.keys():
+            players[mtch['oppnt_id']] = Player(mtch['oppnt_id'],mtch['oppnt_id'])
+            prat[mtch['oppnt_id']] = {}
+            plerr[mtch['oppnt_id']] = [0]
+
+        # difference in timing...
+        dscore = date_parser(mtch['date_time'])
+        #TODO:@Varul add date parser here (for datewise stuff)
+
+        if players[mtch['oppnt_id']].last_match == -1:
+            players[mtch['oppnt_id']].last_match = dscore
+        if players[mtch['usr_id']].last_match == -1:
+            players[mtch['usr_id']].last_match = dscore
+
+        # This difference in time from last match will be passed as the argument to update the score...
+        # 1 is added to keep the value of k_loser/k_winner >= 0
+        k_winner = dscore - players[mtch['usr_id']].last_match + 1
+        k_loser = dscore - players[mtch['oppnt_id']].last_match + 1
+        
+        players[mtch['oppnt_id']].updateTime(dscore)
+        players[mtch['usr_id']].updateTime(dscore)
+        delta = players[mtch['usr_id']].rating - players[mtch['oppnt_id']].rating
+        # predict result of the match 
+        pred = eloObj.predict(delta) # probability of a person with rating ``advantage`` DELTA winning 
+        try:
+            # get result of the match (statistically)
+            match_ratings = get_rating(parse_score(mtch['score']))
+        except Exception as e:
+            print("Skipped ",mtch,e)
+            continue
+
+        winner_stat = max(match_ratings[0],match_ratings[1])/(float(match_ratings[0]) + match_ratings[1])
+        loser_stat = 1 - winner_stat
+
+        #UPDATE SCORES HERE 
+        
+        
+        plerr[mtch['oppnt_id']].append(abs(pred - loser_stat))        # loss for opponent
+        plerr[mtch['usr_id']].append(abs(1 - pred - winner_stat))  # loss for winner 
+
+        players[mtch['usr_id']].rating = eloObj.elo_rate(players[mtch['usr_id']].rating,-1*delta,winner_stat,k_winner)
+        players[mtch['usr_id']].wins +=1 
+        
+        players[mtch['oppnt_id']].rating = eloObj.elo_rate(players[mtch['oppnt_id']].rating,delta,loser_stat,k_loser)
+        players[mtch['oppnt_id']].lose += 1
+        
+        prat[mtch['oppnt_id']][dscore]  = players[mtch['oppnt_id']].rating
+        prat[mtch['usr_id']][dscore]  = players[mtch['usr_id']].rating
+        
+        #TODO:Add time-based updates here...
+    print()
+    print('Done training on data')    
+    ''' 
+    Name mapping can't be done as there are some issues in linking 
+    def mapNames(filename):
+        df = pd.read_csv(filename)
+        id2n_map = {}
+        for i in range(df.shape[0]):
+            entry = df.loc[i]
+            print(i,entry)
+            id2n_map[entry['cntct_id']] = entry['name']
+        return id2n_map
+
+    name_mapping = mapNames('./dataset/squash_player_maps.csv')
+    '''
+    try:
+        names = json.load(arguments.input)['input']
+    except:
+        print('Error while reading input, printing stats for all players')
+        names = list(prat.keys())
+    
+    # plot data 
+    plotPlayerRatings(names,prat,arguments.display,arguments)
+    plotCumulativeError(names,plerr,arguments.display,arguments)
+    plotWindowError(names,plerr,arguments.display,arguments)
+    
