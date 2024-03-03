@@ -1,7 +1,10 @@
 import sys
 import datetime
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from plotter import PlotEngine
 import json 
 
 from src.util.squash.rating import Squash as Player
@@ -74,7 +77,8 @@ def date_parser(date:str):
     month = int(date[1])
     day = int(date[0])
     time_score = (yr - 1950)*365 + (month-1)*30 + day
-    return time_score
+    timestamp = yr*10000 + int(month/12*100)*100 + int(day/(30 + month%2)*100)
+    return time_score, timestamp
 
 
 
@@ -173,23 +177,7 @@ def plotWindowError(ppl,plerr,PLOT,arguments):
         plt.close()
 
 
-
-
-
-
-if __name__ == '__main__':
-    '''
-        Arguments:
-        [0] fname 
-        [--dataset] dataset name 
-        [--mapper] dataset name (for name mapping)
-        [--display] datewise/matchwise
-        [--debug] run in debug mode (default is false) 
-        [--output] output folder destination
-    '''
-    arguments = parseArguments(sys.argv)
-    dataset = clean_data(arguments.dataset)
-
+def evaluateData(dataset,filename,begin_date=0,end_date=99999999):
     # Initialize variables 
     players = {}
     prat = {}
@@ -198,7 +186,7 @@ if __name__ == '__main__':
     eloObj = Elo()
     name_id = {}
     graph = {}
-
+    
     if arguments.debug:
         print('Dataset Shape',dataset.shape[0])
     for i in range(dataset.shape[0]):
@@ -209,18 +197,19 @@ if __name__ == '__main__':
             continue
         name_id[mtch['usr_id']] = mtch['usr_id'] # TODO: change this line @Varul 
         if mtch['usr_id'] not in players.keys():
-            graph[int(mtch['usr_id'])] = []
+            # graph[int(mtch['usr_id'])] = []
             players[mtch['usr_id']] = Player(mtch['usr_id'],mtch['usr_id'])
-            prat[mtch['usr_id']] = {}
-            plerr[mtch['usr_id']] = [0]
+            prat[str(mtch['usr_id'])] = {}
+            plerr[str(mtch['usr_id'])] = {}
         if mtch['oppnt_id'] not in players.keys():
-            graph[int(mtch['oppnt_id'])] = []
+            # graph[int(mtch['oppnt_id'])] = []
             players[mtch['oppnt_id']] = Player(mtch['oppnt_id'],mtch['oppnt_id'])
-            prat[mtch['oppnt_id']] = {}
-            plerr[mtch['oppnt_id']] = [0]
+            prat[str(mtch['oppnt_id'])] = {}
+            plerr[str(mtch['oppnt_id'])] = {}
 
         # difference in timing...
-        dscore = date_parser(mtch['date_time'])
+        dscore,timestamp = date_parser(mtch['date_time'])
+        timestamp = str(timestamp)
         #TODO:@Varul add date parser here (for datewise stuff)
 
         if players[mtch['oppnt_id']].last_match == -1:
@@ -249,11 +238,11 @@ if __name__ == '__main__':
         loser_stat = 1 - winner_stat
 
         #UPDATE SCORES HERE 
-        graph[int(mtch['usr_id'])].append(int(mtch['oppnt_id']))
-        graph[int(mtch['oppnt_id'])].append(int(mtch['usr_id']))
+        # graph[mtch['usr_id']].append(int(mtch['oppnt_id']))
+        # graph[mtch['oppnt_id']].append(int(mtch['usr_id']))
         
-        plerr[mtch['oppnt_id']].append(abs(pred - loser_stat))        # loss for opponent
-        plerr[mtch['usr_id']].append(abs(1 - pred - winner_stat))  # loss for winner 
+        plerr[str(mtch['oppnt_id'])][timestamp] = (abs(pred - loser_stat))        # loss for opponent
+        plerr[str(mtch['usr_id'])][timestamp] = (abs(1 - pred - winner_stat))  # loss for winner 
 
         players[mtch['usr_id']].rating = eloObj.elo_rate(players[mtch['usr_id']].rating,-1*delta,winner_stat,k_winner)
         players[mtch['usr_id']].wins +=1 
@@ -261,73 +250,31 @@ if __name__ == '__main__':
         players[mtch['oppnt_id']].rating = eloObj.elo_rate(players[mtch['oppnt_id']].rating,delta,loser_stat,k_loser)
         players[mtch['oppnt_id']].lose += 1
         
-        prat[mtch['oppnt_id']][dscore]  = players[mtch['oppnt_id']].rating
-        prat[mtch['usr_id']][dscore]  = players[mtch['usr_id']].rating
+        prat[str(mtch['oppnt_id'])][timestamp]  = players[mtch['oppnt_id']].rating
+        prat[str(mtch['usr_id'])][timestamp]  = players[mtch['usr_id']].rating
         
         #TODO:Add time-based updates here...
     print()
     print('Done training on data')    
-    # for i in graph.keys():
-    #     for j in graph[i]:
-    #         print(i,j,file=fpt)
-    fpt = open('./op.json','w')
-    print(graph,file=fpt)
-    # fpt.write(json.dumps(graph))
-    fpt.close()
-    colors = {}
-    ccolor = 0
-    colors[0] = []
-    allocated_color = {}
-    for i in graph.keys():
-        allocated_color[int(i)] = -1
+    final_dict = {
+        'rating':prat,
+        'error':plerr
+    }
+    with open(filename,'w') as fp:
+        json.dump(final_dict,fp)
 
-    def dfs(parent,node,color,verbose=False):
-        global allocated_color
-        global graph
-        global colors
-        if verbose:
-            print(node,sep=' ')
-        if color == 17:
-            print(node)
-        allocated_color[int(node)] = color
-        colors[color].append(node)
-        for child in graph[node]:
-            if parent != child and allocated_color[node] == -1:
-                dfs(node,child,color,verbose)
+if __name__ == '__main__':
+    arguments = parseArguments(sys.argv)
+    plotter = PlotEngine(arguments.display,arguments.plot_path)
 
-
-    for i in graph.keys():
-        if allocated_color[int(i)] == -1:
-            dfs(-1,i,ccolor)
-            ccolor += 1
-            colors[ccolor] = []
-        else:
-            print('not allocating to',i)
-    print(allocated_color[3300])
-    dfs(-1,3300,17,True)
-    print()
-
-    ''' 
-    Name mapping can't be done as there are some issues in linking 
-    def mapNames(filename):
-        df = pd.read_csv(filename)
-        id2n_map = {}
-        for i in range(df.shape[0]):
-            entry = df.loc[i]
-            print(i,entry)
-            id2n_map[entry['cntct_id']] = entry['name']
-        return id2n_map
-
-    name_mapping = mapNames('./dataset/squash_player_maps.csv')
-    '''
-    try:
-        names = json.load(arguments.input)['input']
-    except:
-        print('Error while reading input, printing stats for all players')
-        names = list(prat.keys())
-    
-    # plot data 
-    plotPlayerRatings(names,prat,arguments.display,arguments)
-    plotCumulativeError(names,plerr,arguments.display,arguments)
-    plotWindowError(names,plerr,arguments.display,arguments)
-    
+    stdt = arguments.startTime
+    endt = arguments.endTime
+    subFilter = None 
+    if arguments.input != None:
+        with open(arguments.input,'r') as fp:
+            subFilter = json.load(fp)['inputs']
+    print(subFilter)
+    dataset = clean_data(arguments.dataset)
+    evaluateData(dataset,arguments.output,stdt,endt)
+    plotter.load_data(arguments.output)
+    plotter.plot_ratings(subFilter)
