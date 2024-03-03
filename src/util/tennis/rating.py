@@ -37,7 +37,11 @@ def get_rating(score:list):
             score_p0 += 140
         else:
             score_p1 += 140
+    sscore = score_p0 + score_p1
+    score_p0 = score_p0 /sscore
+    score_p1 = score_p1/sscore
     return (score_p0,score_p1)
+
 
 
 class Tennis(Player):

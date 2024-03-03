@@ -15,4 +15,10 @@ def parseArguments(args:list):
         '--output',help='Output folder destination',type=str,default=None)
     parser.add_argument(
         '--input',help='Input file path',type=str,default=None)
+    parser.add_argument(
+        '--startTime',help='start-time (format = yyyymmdd) for plotting data',type=int,default=0)
+    parser.add_argument(
+        '--endTime',help='end-time (format = yyyymmdd) for plotting data', type=int, default=99999999)
+    parser.add_argument(
+        '--plot_path',help='Folder where plots are stoed (don\'t put \\ in the end)',type=str,default=None)
     return  parser.parse_args()
