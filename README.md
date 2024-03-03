@@ -9,11 +9,14 @@ We make available ATP dataset of matches from `1968-2022`. This can be used for 
 
 #### Elo
 ```sh
-$ python3 elo_tennis.py ./dataset/atp_matches_till_2022.csv [datewise/matchwise] [OPTIONAL:file input]
+$ python3 (elo_tennis/elo_squash).py --dataset [DATASET-PATH] --output [JSON-OUTPUT-FILEPATH] --display [datewise/matchwise] --plot_path [OUTPUT-DIRECTORY for PLOTTING (dont write the last '/') (optional)] --input [INPUTS (if any)]
 ```
-> Example: `$ python3 elo_tennis.py dataset/atp_matches_till_2022.csv datewise inputs/in1.json`
-Following which, the system will train on the dataset and prompt the name of the player to display the corresponding plots. To exit, press `X`.
 
+> Example: `$ python3 elo_tennis.py --dataset ./dataset/atp_matches_till_2022.csv --output temp.json --display datewise --plot_path outputs --input ./inputs/in1.json`
+
+> Example: `$ python3 elo_squash.py --dataset ./dataset/squash_dataset.csv --output temp_squash.json --display datewise --plot_path ./outputs --input ./inputs/in_squash.json`
+
+DO input the input otherwise code tries to print all logs and it is not possible/very heavy in matplotlib 
 #### Glicko
 ```sh
 $ python3 glicko_tennis.py ./dataset/atp_matches_till_2022.csv [datewise] [input_file]
