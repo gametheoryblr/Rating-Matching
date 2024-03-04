@@ -3,6 +3,8 @@ import sys
 # library imports 
 import os
 import pandas as pd 
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import json
 from datetime import datetime
@@ -12,30 +14,39 @@ pd.set_option('display.max_rows', None)
 import json
 from tqdm import tqdm
 
+from src.util.arparse import parseArguments
+from plotter import PlotEngine
+
+
 # codebase imports 
 from src.Glicko2.glicko2 import Player
 
 #load files 
-def load_data(fname):
+def load_data(fname,stdt=0,enddt=99999999):
     matches = pd.read_csv(fname)
     # filter dataset 
     matches = matches[['tourney_id', 'tourney_name', 'surface', 'draw_size', 'tourney_level', 'tourney_date', 'match_num', 'winner_id', 'winner_name','loser_id', 'loser_name', 'score', 'best_of', 'round']]
     # filter dataframe where tourney_date is between 2014 and 2016
-    matches = matches[matches["tourney_date"]>=20150000]
-    matches = matches[matches["tourney_date"]<=20160000]
+    matches = matches[matches["tourney_date"]>=stdt]
+    matches = matches[matches["tourney_date"]<=enddt]
     return matches
 
-def evaluateData(matches,p_ids):
+def evaluateData(matches,opFname,p_ids):
 
     df = pd.DataFrame()
     player_ratings = {}
+    plerr = {}
+    prat = {}
     for ind,row in tqdm(matches.iterrows(), total=len(matches), desc="Processing matches"):
-        winner_id = row["winner_id"]
-        loser_id = row["loser_id"]
+        winner_id = row["winner_name"]
+        loser_id = row["loser_name"]
             
         for player_id in [winner_id, loser_id]:
             if player_id not in player_ratings:
                 player_ratings[player_id] = {"Rating": 1500, "RD": 200}
+            if player_id not in prat.keys():
+                prat[player_id] = {}
+                plerr[player_id] = {} 
         
         w_rating = player_ratings[winner_id]['Rating']
         w_rd = player_ratings[winner_id]['RD']
@@ -55,9 +66,15 @@ def evaluateData(matches,p_ids):
         winner.update_player([l_rating],[l_rd],[1])
         loser.update_player([w_rating],[w_rd],[0])
         
+        # convert time to desired format here 
+        tst = row['tourney_date']
+        timestamp = int((tst/10000)*1000) + int(100*((tst%10000)/100)/(12)) + int(((tst%100)/31)*100)
+
         player_ratings[winner_id]['Rating'] = winner.getRating()
+        prat[winner_id][timestamp] = winner.getRating()
         player_ratings[winner_id]['RD'] = winner.getRd()
         player_ratings[loser_id]['Rating'] = loser.getRating()
+        prat[loser_id][timestamp] = loser.getRating()
         player_ratings[loser_id]['RD'] = loser.getRd()
 
         if w_rating> l_rating:
@@ -67,11 +84,22 @@ def evaluateData(matches,p_ids):
 
         if row['winner_name'] in p_ids:
             #append to df with columns: player updated rating, prediction, player_id,tourney_date 
-            df = df.append({'player_name':row['winner_name'], 'player_rating': player_ratings[winner_id]['Rating'], 'prediction': err, 'tourney_date': row['tourney_date']}, ignore_index=True)
+            df = pd.concat([df,pd.DataFrame([{'player_name':row['winner_name'], 'player_rating': player_ratings[winner_id]['Rating'], 'prediction': err, 'tourney_date': row['tourney_date']}])],ignore_index=True)
+            # df = df.append({'player_name':row['winner_name'], 'player_rating': player_ratings[winner_id]['Rating'], 'prediction': err, 'tourney_date': row['tourney_date']}, ignore_index=True)
 
         if row['loser_name'] in p_ids:
             #append to df with columns: player updated rating, prediction, player_id,tourney_date 
-            df = df.append({'player_name':row['loser_name'],  'player_rating': player_ratings[loser_id]['Rating'], 'prediction': err, 'tourney_date': row['tourney_date']}, ignore_index=True)
+            df = pd.concat([df,pd.DataFrame([{'player_name':row['loser_name'],  'player_rating': player_ratings[loser_id]['Rating'], 'prediction': err, 'tourney_date': row['tourney_date']}])],ignore_index=True)
+            # df = df.append({'player_name':row['loser_name'],  'player_rating': player_ratings[loser_id]['Rating'], 'prediction': err, 'tourney_date': row['tourney_date']}, ignore_index=True)
+
+    masterdict = {
+        'rating':prat,
+        'error':plerr
+    } 
+    print('Prat',prat)
+    print('Master dict',masterdict)
+    with open(opFname,'w') as fp:
+        json.dump(masterdict,fp)
 
     return df
 
@@ -102,21 +130,19 @@ def display_results(dataset):
     plt.show()
 
 if __name__ == '__main__':
-    # fname = input('Enter Dataset Filename')
-    fname = sys.argv[1]
-    dformat = sys.argv[2]
-    assert(dformat in ['datewise','matchwise'])
-    dataset = load_data(fname)
-    if len(sys.argv) == 4: # input file 
-        try:
-            input_set = json.load(open(sys.argv[3],'r'))['input']
-        except Exception as e:
-            print('Error: Invalid file or input format. Please input list through a json file.')
-            print(e)
-            exit(1)   
-    else:
-        print("Glicko needs input. Please input list through a json file.")
-        exit(1)
+    
+    arguments = parseArguments(sys.argv)
+    plotter = PlotEngine(arguments.display,arguments.plot_path)
 
-    preds = evaluateData(dataset,input_set)
-    display_results(preds)
+    stdt = arguments.startTime
+    endt = arguments.endTime 
+    subFilter = None 
+    if arguments.input != None:
+        with open(arguments.input,'r') as fp:
+            subFilter = json.load(fp)['inputs']
+
+    if arguments.train == 1:
+        dataset = load_data(arguments.dataset,stdt,endt)
+        preds = evaluateData(dataset,arguments.output,subFilter)
+    plotter.load_data(arguments.output)
+    plotter.plot_ratings(subFilter,arguments.percentage)
