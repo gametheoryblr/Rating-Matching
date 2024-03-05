@@ -132,6 +132,6 @@ if __name__ == '__main__':
     if arguments.train == 1:
         dataset = load_data(arguments.dataset,stdt,endt)
         preds = evaluateData(dataset,arguments.output,subFilter)
-    plotter.load_data(arguments.output)
+    plotter.load_data(arguments.output,'glicko')
     plotter.plot_ratings(subFilter,arguments.percentage)
 

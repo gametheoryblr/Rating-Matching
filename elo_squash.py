@@ -150,11 +150,11 @@ def evaluateData(dataset,filename,begin_date=0,end_date=99999999):
             players[mtch['oppnt_id']].rating = eloObj.elo_rate(players[mtch['oppnt_id']].rating,delta,loser_stat,k_loser)
             players[mtch['oppnt_id']].lose += 1
         else:
-            players[mtch['oppnt_id']].rating = eloObj.elo_rate(players[mtch['oppnt_id']].rating,-1*delta,winner_stat,k_winner)
+            players[mtch['oppnt_id']].rating = eloObj.elo_rate(players[mtch['oppnt_id']].rating,delta,winner_stat,k_winner)
             players[mtch['oppnt_id']].wins +=1 
             
-            players[mtch['oppnt_id']].rating = eloObj.elo_rate(players[mtch['oppnt_id']].rating,delta,loser_stat,k_loser)
-            players[mtch['oppnt_id']].lose += 1
+            players[mtch['usr_id']].rating = eloObj.elo_rate(players[mtch['usr_id']].rating,-1*delta,loser_stat,k_loser)
+            players[mtch['usr_id']].lose += 1
 
         prat[str(mtch['oppnt_id'])][timestamp]  = players[mtch['oppnt_id']].rating
         prat[str(mtch['usr_id'])][timestamp]  = players[mtch['usr_id']].rating
@@ -186,5 +186,5 @@ if __name__ == '__main__':
     if arguments.train:
         dataset = clean_data(arguments.dataset)
         evaluateData(dataset,arguments.output,stdt,endt)
-    plotter.load_data(arguments.output)
+    plotter.load_data(arguments.output,'elo')
     plotter.plot_ratings(subFilter,arguments.percentage)

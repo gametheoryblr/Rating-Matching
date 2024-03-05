@@ -8,10 +8,10 @@ class EloType(Enum):
     temporal_continuous = 'temporal-continuous'
 
 class Elo:
-    def __init__(self,elo_type=EloType.vanilla):
+    def __init__(self,elo_type=EloType.temporal_continuous):
         self.base = 10.0 
         self.const = 400.0 
-        self.k = 8
+        self.k = 4
         self.__elo_type = elo_type
     '''
         delta is the rating difference in the current match's performance
@@ -25,14 +25,15 @@ class Elo:
         return old_ratings + self.k*(result - ea)
 
     def temporal_elo(self,old_ratings, delta, result,time_k=1):
+        time_k = 1 # to test 
         ea = 1 / (1 + self.base**(delta/self.const))
         return old_ratings + self.k*time_k*(result - ea)
 
     def elo_rate(self,old_ratings,delta,result,time=1):
         if old_ratings > 2000:
-            self.k = 8
+            self.k = 4
         else:
-            self.k = 16
+            self.k = 8
         if self.__elo_type == EloType.vanilla:
             return self.vanilla_elo(old_ratings,delta,result,time)
         if self.__elo_type == EloType.temporal_continuous:
