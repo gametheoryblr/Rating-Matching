@@ -67,8 +67,11 @@ def evaluateData(matches,opFname,p_ids):
         loser.update_player([w_rating],[w_rd],[0])
         
         # convert time to desired format here 
-        tst = row['tourney_date']
-        timestamp = int((tst/10000)*1000) + int(100*((tst%10000)/100)/(12)) + int(((tst%100)/31)*100)
+        tst = int(row['tourney_date']) # yyyymmdd 
+        yr = int(tst/10000)
+        mth = int((tst%10000)/100)
+        day = int(tst%100)
+        timestamp = yr*10000 + int(100*(mth/12))*100 + int(100*(day/(30+mth%2)))
 
         player_ratings[winner_id]['Rating'] = winner.getRating()
         prat[winner_id][timestamp] = winner.getRating()

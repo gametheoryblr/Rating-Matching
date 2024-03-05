@@ -3,9 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # codebase imports 
-from src.util.tennis.rating import Tennis as Player,get_rating
-from src.v1.rating_elo.elo import Elo 
-from src.util.ufuncs import date_parser, parse_score
+from ..src.util.tennis.rating import Tennis as Player,get_rating
+from ..src.v1.rating_elo.elo import Elo 
+from ..src.util.ufuncs import date_parser, parse_score
 
 #load files 
 def load_data(fname):

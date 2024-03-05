@@ -1,3 +1,4 @@
+import random 
 import matplotlib.pyplot as plt 
 import json 
 '''
@@ -18,13 +19,14 @@ class PlotEngine:
         self.save_path = _save_path
         self.rating_data = []
         self.error_data = [] 
+        self.rating_name = [] 
         self.attribute_mapper = [] # should be None or dict for each entry in rating-data and error-data 
 
     def constraints(self):
         assert(len(self.rating_data) == len(self.error_data))
         assert(len(self.rating_data) == len(self.attribute_mapper))
 
-    def load_data(self,filepath):
+    def load_data(self,filepath,name=''):
         try:
             with open(filepath,'r') as fp:
                 data = json.load(fp)
@@ -32,6 +34,7 @@ class PlotEngine:
                 assert('error' in data.keys() and type(data['error'] == type({})))
                 self.rating_data.append(data['rating']) 
                 self.error_data.append(data['error'])
+                self.rating_name.append(name)
                 if 'attributes' in data.keys():
                     self.attribute_mapper.append(data['attributes'])
                 else:
@@ -41,7 +44,7 @@ class PlotEngine:
         self.constraints() # throws errors if there is some issue in state of the object after calling the function 
 
 
-    def plot_ratings(self,subFilter=None,drange=[0,-1]): 
+    def plot_ratings(self,subFilter=None,percent=1,drange=[0,-1]): 
         # errenous input handling 
         if drange[1] < drange[0] or drange[0] < 0 or drange[1] >= len(self.rating_data): # default case... or error in input 
             drange = [0,len(self.rating_data)-1]
@@ -49,22 +52,22 @@ class PlotEngine:
         while i <= drange[1]:
             for akey in self.rating_data[i].keys():
                 if subFilter != None and akey not in subFilter:
-                    print('skipping',akey)
+                    # print('skipping',akey)
                     continue
-                print('not skipping',akey)
-
+                if random.random() > percent:
+                    continue
+                # print('not skipping',akey)
                 # to make sure the keys for both error and rating_data is the same.... and if attribute is not none, then each has the key:name placeholder (either correct value or None)
                 # currently using plt.plot 
                 # @Varul TODO: overload this function with another argument (plot-object) and do work on that object
                 self.rating_data[i][akey] = {int(float(k)):v for k,v in self.rating_data[i][akey].items()}
                 self.rating_data[i][akey] = dict(sorted(self.rating_data[i][akey].items()))
-                print(self.rating_data[i][akey].items())
                 # print(self.rating_data[i][akey].keys())
                 if self.plot_type == 'datewise':
-                    plt.plot(self.rating_data[i][akey].keys(),self.rating_data[i][akey].values(),label=( akey if (self.attribute_mapper[i] == None or self.attribute_mapper[i][akey]['name'] == None) else self.attribute_mapper[i][akey]['name']))
+                    plt.plot(self.rating_data[i][akey].keys(),self.rating_data[i][akey].values(),label=self.rating_name[i] + ( akey if (self.attribute_mapper[i] == None or self.attribute_mapper[i][akey]['name'] == None) else self.attribute_mapper[i][akey]['name']))
                 elif self.plot_type == 'matchwise':
                     z = len(list(self.rating_data[i][akey].keys()))
-                    plt.plot(range(z),list(self.rating_data[i][akey].values()),label=akey) # ( key if (self.attribute_mapper[i] == None or self.attribute_mapper[i][key]['name'] == None) else self.attribute_mapper[i][key]['name']))
+                    plt.plot(range(z),list(self.rating_data[i][akey].values()),label=self.rating_name[i] + akey) # ( key if (self.attribute_mapper[i] == None or self.attribute_mapper[i][key]['name'] == None) else self.attribute_mapper[i][key]['name']))
             i += 1
 
         plt.title(f'Plot of Rating vs {self.plot_type[:-4]}')

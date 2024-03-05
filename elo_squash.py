@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from plotter import PlotEngine
 import json 
 
-from src.util.squash.rating import Squash as Player
+from src.util.squash.rating import Squash
 from src.v1.rating_elo.elo import Elo
 from src.util.arparse import parseArguments
 
@@ -32,21 +32,21 @@ def clean_data(filename:str):
                 - opponent 
                 - centre_id
     '''
-    matches_dropset = ['match_id',
-        'centre_user_verified', 'centre_verified', 'created', 'match_type', 'sport', 'status', 'team',
-        'user_opponent_verified', 'user_verified', 'verified', 'booking_id']
-    try:
-        matches.drop(matches_dropset,inplace=True,axis=1)
-    except Exception as e:
-        print("Keys not found")
+    # matches_dropset = ['match_id',
+    #     'centre_user_verified', 'centre_verified', 'created', 'match_type', 'sport', 'status', 'team',
+    #     'user_opponent_verified', 'user_verified', 'verified', 'booking_id']
+    # try:
+    #     matches.drop(matches_dropset,inplace=True,axis=1)
+    # except Exception as e:
+    #     print("Keys not found")
 
     # check if identifier is unique (can be used as primary key)
-    primary_keys = []
-    for k in matches.keys():
-        if matches[k].is_unique:
-                primary_keys.append(k)
-    print('All keys', matches.keys())
-    print('Primary keys',primary_keys)
+    # primary_keys = []
+    # for k in matches.keys():
+    #     if matches[k].is_unique:
+    #             primary_keys.append(k)
+    # print('All keys', matches.keys())
+    # print('Primary keys',primary_keys)
     return matches
     
 def get_rating(score:list,result='W'):
@@ -55,30 +55,40 @@ def get_rating(score:list,result='W'):
     score_p1 = 0
     w0 = 0 
     w1 = 0
+    winning_bonus = 0.25
+    multiplication_factor = (1 - winning_bonus)/len(score)
     for st in score:
         if st[0] > st[1]:
             winner += 1
             w0 += 1
-            score_p0 += st[0]*130/(st[0] + st[1])
-            score_p1 += st[1]*130/(st[0] + st[1])
+            score_p0 += multiplication_factor*st[0]/(st[0] + st[1])
+            score_p1 += multiplication_factor*st[1]/(st[0] + st[1])
         else:
             w1 += 1
-            score_p1 = st[1]*130/(st[0] + st[1])
-            score_p0 = st[0]*130/(st[0] + st[1])
-    # can omit this tbh
-    # if result == 'W':
-    #     score_p0 += 200 
-    ssc = float(score_p0 + score_p1)
-    return (score_p0/ssc,score_p1/ssc)
+            score_p1 = multiplication_factor*st[1]/(st[0] + st[1])
+            score_p0 = multiplication_factor*st[0]/(st[0] + st[1])
+    if winner > len(score)/2:
+        winner = 0
+        score_p0 += winning_bonus
+    else:
+        winner = 1
+        score_p1 += winning_bonus
+    sscore = score_p0 + score_p1
+    score_p0 = score_p0 /sscore
+    score_p1 = score_p1/sscore
+    return (score_p0,score_p1)
 
-def date_parser(date:str): 
-    date = date.split('_')[0].split('-')
+def date_parser(dt:str): 
+    date = dt.split('_')[0].split('-') 
+    tmp = dt.split('_')[1].split(':')
+    print(dt,date)
     yr = int(date[0])
     month = int(date[1])
-    day = int(date[0])
+    day = int(date[2])
+    ttime = int(tmp[0])*100 + int(tmp[1]) 
     time_score = (yr - 1950)*365 + (month-1)*30 + day
-    timestamp = yr*10000 + int(month/12*100)*100 + int(day/(30 + month%2)*100)
-    return time_score, timestamp
+    timestamp = yr*100000000 + int((month/12)*100)*1000000 + int(day/(30 + month%2)*100)*10000  + ttime 
+    return time_score, timestamp 
 
 
 
@@ -186,24 +196,26 @@ def evaluateData(dataset,filename,begin_date=0,end_date=99999999):
     eloObj = Elo()
     name_id = {}
     graph = {}
-    
+    count = 0
     if arguments.debug:
         print('Dataset Shape',dataset.shape[0])
     for i in range(dataset.shape[0]):
         pdone = int(100*i/dataset.shape[0])
         print('\r[',pdone*'=',(100-pdone)*'-',']',pdone,'\%',sep='',end='')
         mtch = dataset.loc[i]
-        if mtch['result'] not in ['W']: # ignore draws....(losses are just repeated datapoints)
+        if mtch['result'] not in ['W','L']: # ignore draws....(losses are just repeated datapoints)
             continue
+        
+        
         name_id[mtch['usr_id']] = mtch['usr_id'] # TODO: change this line @Varul 
         if mtch['usr_id'] not in players.keys():
             # graph[int(mtch['usr_id'])] = []
-            players[mtch['usr_id']] = Player(mtch['usr_id'],mtch['usr_id'])
+            players[mtch['usr_id']] = Squash(mtch['usr_id'],mtch['usr_id'])
             prat[str(mtch['usr_id'])] = {}
             plerr[str(mtch['usr_id'])] = {}
         if mtch['oppnt_id'] not in players.keys():
             # graph[int(mtch['oppnt_id'])] = []
-            players[mtch['oppnt_id']] = Player(mtch['oppnt_id'],mtch['oppnt_id'])
+            players[mtch['oppnt_id']] = Squash(mtch['oppnt_id'],mtch['oppnt_id'])
             prat[str(mtch['oppnt_id'])] = {}
             plerr[str(mtch['oppnt_id'])] = {}
 
@@ -227,16 +239,11 @@ def evaluateData(dataset,filename,begin_date=0,end_date=99999999):
         delta = players[mtch['usr_id']].rating - players[mtch['oppnt_id']].rating
         # predict result of the match 
         pred = eloObj.predict(delta) # probability of a person with rating ``advantage`` DELTA winning 
-        try:
-            # get result of the match (statistically)
-            match_ratings = get_rating(parse_score(mtch['score']))
-        except Exception as e:
-            print("Skipped ",mtch,e)
-            continue
-
-        winner_stat = max(match_ratings[0],match_ratings[1])/(float(match_ratings[0]) + match_ratings[1])
-        loser_stat = 1 - winner_stat
-
+        match_ratings = get_rating(parse_score(mtch['score']))
+        
+        winner_stat = max(match_ratings[0],match_ratings[1]) #max(match_ratings[0],match_ratings[1])/(float(match_ratings[0]) + match_ratings[1])
+        loser_stat = min(match_ratings[0],match_ratings[1]) # 1 - winner_stat
+        
         #UPDATE SCORES HERE 
         # graph[mtch['usr_id']].append(int(mtch['oppnt_id']))
         # graph[mtch['oppnt_id']].append(int(mtch['usr_id']))
@@ -252,10 +259,13 @@ def evaluateData(dataset,filename,begin_date=0,end_date=99999999):
         
         prat[str(mtch['oppnt_id'])][timestamp]  = players[mtch['oppnt_id']].rating
         prat[str(mtch['usr_id'])][timestamp]  = players[mtch['usr_id']].rating
+        if mtch['usr_id'] == 3300 or mtch['oppnt_id'] == 3300:
+            count += 1
         
         #TODO:Add time-based updates here...
     print()
     print('Done training on data')    
+    print('Count : ',count)
     final_dict = {
         'rating':prat,
         'error':plerr
@@ -274,7 +284,8 @@ if __name__ == '__main__':
         with open(arguments.input,'r') as fp:
             subFilter = json.load(fp)['inputs']
     print(subFilter)
-    dataset = clean_data(arguments.dataset)
-    evaluateData(dataset,arguments.output,stdt,endt)
+    if arguments.train:
+        dataset = clean_data(arguments.dataset)
+        evaluateData(dataset,arguments.output,stdt,endt)
     plotter.load_data(arguments.output)
-    plotter.plot_ratings(subFilter)
+    plotter.plot_ratings(subFilter,arguments.percentage)

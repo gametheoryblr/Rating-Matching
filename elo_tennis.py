@@ -127,7 +127,10 @@ if __name__ == '__main__':
         with open(arguments.input,'r') as fp:
             subFilter = json.load(fp)['inputs']
     print("skipping",subFilter)
-    dataset = load_data(arguments.dataset)
-    evaluateData(dataset,arguments.output,stdt,endt)
-    plotter.load_data(arguments.output)
-    plotter.plot_ratings(subFilter)
+    print(arguments.train,type(arguments.train))
+    if arguments.train == 1: 
+        dataset = load_data(arguments.dataset)
+        evaluateData(dataset,arguments.output,stdt,endt)
+    else: # plot only if not training 
+        plotter.load_data(arguments.output)
+        plotter.plot_ratings(subFilter,arguments.percentage)

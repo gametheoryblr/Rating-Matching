@@ -56,9 +56,13 @@ def evaluateData(matches,fname,p_ids):
     prat = {} 
     plerr = {} 
     player_ratings = {}
+    count = 0
+    print('Dataset size',len(matches))
     for ind,row in tqdm(matches.iterrows(), total=len(matches), desc="Processing matches"):
         p1_id = row["usr_id"]
         p2_id = row["oppnt_id"]
+        if 3300 in [p1_id,p2_id]:
+            count += 1
         scoreline = row['score']    
         for player_id in [p1_id, p2_id]:
             if player_id not in player_ratings:
@@ -89,9 +93,14 @@ def evaluateData(matches,fname,p_ids):
             oc = min(oc1,oc2)
         else:
             oc = 0.5
-        ttime = row['date_time']/10000
-        timestamp = 10000*int(ttime/10000) + 100*int(100*((ttime%10000)/100)/12) + int(100*((ttime%100)/31))
-
+        tst = row['date_time']/10000
+        # print(row['date_time'],type(row['date_time']))
+        yr = int(tst/10000)
+        mth = int((tst%10000)/100)
+        day = int(tst%100)
+        ttime = row['date_time']%10000
+        timestamp = yr*100000000 + int(100*(mth/12))*1000000 + int(100*(day/(30+mth%2)))*10000 + ttime
+        print(timestamp)
         p1.update_player([p2_rating],[p2_rd],[oc])
         p2.update_player([p1_rating],[p1_rd],[1-oc])
         
@@ -114,6 +123,7 @@ def evaluateData(matches,fname,p_ids):
             # Append the dataframe to the list
             dfs_to_concat.append(player_df)
 
+    print('Count : ',count)
     masterdict = {
         'rating':prat,
         'error':plerr
