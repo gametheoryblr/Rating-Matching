@@ -1,5 +1,6 @@
 import random 
 import matplotlib.pyplot as plt 
+import datetime
 import json 
 '''
     plot_type : stores either x-axis will be date-wise or match-wise
@@ -77,7 +78,7 @@ class PlotEngine:
         if self.save_path == None:
             plt.show() 
         else:
-            plt.savefig(self.save_path+'/ratings.png')
+            plt.savefig(self.save_path+'/'+datetime.datetime.now().strftime("%d%m%Y_%H%M")+'_ratings.png')
         self.constraints() # not required as this is a non-mutable type function but still added for security 
 
     

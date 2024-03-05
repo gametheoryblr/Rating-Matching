@@ -16,22 +16,22 @@ def score_sigmoid(scoreline):
             s1 = score[0]
             s2 = score[1]
             if s1>s2:
-                p1_score+=set_fraction
+                p1_score+=set_fraction*s1/(s1+s2)
                 p1_sets+=1
-            elif s1<s2:
-                p2_score+=set_fraction
+            else: # s1<s2: # no draws 
+                p2_score+=set_fraction*s1/(s1 + s2)
                 p2_sets+=1
-            else:
-                p1_score+=set_fraction/2
-                p2_score+=set_fraction/2
+            # else:
+            #     p1_score+=set_fraction/2
+            #     p2_score+=set_fraction/2
             
         if(p1_sets>p2_sets): 
             p1_score+=win_bonus
         elif(p1_sets<p2_sets):
             p2_score+=win_bonus
-        else:
-            p1_score+=win_bonus/2
-            p2_score+=win_bonus/2
+        # else:
+        #     p1_score+=win_bonus/2
+        #     p2_score+=win_bonus/2
         
         return (p1_score,p2_score)
     except Exception as e:
