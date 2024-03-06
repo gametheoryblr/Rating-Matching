@@ -19,7 +19,7 @@ $ python3 (elo_tennis/elo_squash).py --dataset [DATASET-PATH] --output [JSON-OUT
 > Example: `$ python3 elo_tennis.py --dataset ./dataset/atp_matches_till_2022.csv --output temp.json --display datewise --plot_path outputs --train 0 --percentage=0.1` 
 
 
-> Example: `$ python3 elo_squash.py --dataset ./dataset/squash_dataset.csv --output temp_squash.json --display datewise --plot_path ./outputs --train 1`
+> Example: `$ python3 elo_squash.py --dataset ./dataset/squash_dataset.csv --output temp_squash.json --display datewise --plot_path ./outputs --train 1 --input ./inputs/in_squash.json`
 
 > Example: `$ python3 elo_squash.py --dataset ./dataset/squash_dataset.csv --output temp_squash.json --display datewise --plot_path ./outputs --train 0 --input ./inputs/in_squash.json`
 
