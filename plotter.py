@@ -1,4 +1,6 @@
 import random 
+import matplotlib 
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt 
 import datetime
 import json 
@@ -65,7 +67,7 @@ class PlotEngine:
                 self.rating_data[i][akey] = dict(sorted(self.rating_data[i][akey].items()))
                 # print(self.rating_data[i][akey].keys())
                 if self.plot_type == 'datewise':
-                    plt.plot(self.rating_data[i][akey].keys(),self.rating_data[i][akey].values(),label=self.rating_name[i] + ( akey if (self.attribute_mapper[i] == None or self.attribute_mapper[i][akey]['name'] == None) else self.attribute_mapper[i][akey]['name']))
+                    plt.plot(self.rating_data[i][akey].keys(),self.rating_data[i][akey].values(),label=self.rating_name[i] + akey)#  ( akey if (self.attribute_mapper[i] == None or self.attribute_mapper[i][akey]['name'] == None) else self.attribute_mapper[i][akey]['name']))
                 elif self.plot_type == 'matchwise':
                     z = len(list(self.rating_data[i][akey].keys()))
                     plt.plot(range(z),list(self.rating_data[i][akey].values()),label=self.rating_name[i] + akey) # ( key if (self.attribute_mapper[i] == None or self.attribute_mapper[i][key]['name'] == None) else self.attribute_mapper[i][key]['name']))
