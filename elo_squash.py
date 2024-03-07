@@ -20,10 +20,14 @@ def time_parser(dt:str):
     timestamp = dttime[0]*100000000 + int(100*dttime[1]/12)*1000000 + int(100*dttime[2]/31)*10000 + int(100*dttime[3]/24)*100 + int(100*dttime[4]/60)
     return timestamp
 
-def clean_data(filename:str):
+def clean_data(filename:str,stdt=0,enddt=99999999):
     matches = pd.read_csv(filename)
     matches = matches[matches['result']!='D']
     matches["timestamp"] = matches.apply(lambda row: time_parser(row['date_time']),axis=1)
+    matches.sort_values(by=["timestamp"],inplace=True)
+    stdt *= 10000
+    enddt *= 10000
+    matches = matches[matches["timestamp"]<=enddt]
     matches.sort_values(by=["timestamp"],inplace=True)
     print('u',matches[matches['usr_id'] == 72])
     print('o',matches[matches['oppnt_id'] == 72])

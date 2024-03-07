@@ -33,8 +33,12 @@ def time_parser(dt:str):
 #load files 
 def load_data(fname,stdt=0,enddt=99999999):
     matches = pd.read_csv(fname)
+    stdt *= 10000
+    enddt *= 10000
     matches["timestamp"] = matches.apply(lambda row: time_parser(row['date_time']),axis=1)
     matches = matches[matches['result']!='D']
+    matches = matches[matches["timestamp"]>=stdt]
+    matches = matches[matches["timestamp"]<=enddt]
     matches.sort_values(by=["timestamp"],inplace=True)
     print(matches[matches['usr_id']==4145].to_json())
 
@@ -78,7 +82,7 @@ def evaluateData(matches,fname,p_ids):
         p2 = Player()
         p2.setRating(player_ratings[p2_id]['Rating'])
         p2.setRd(player_ratings[p2_id]['RD'])
-        
+        # print("scoreline",scoreline)
         oc1,oc2 = score_sigmoid(scoreline) 
         if row['result']=='W':
             oc = max(oc1,oc2)
