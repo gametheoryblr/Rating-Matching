@@ -27,21 +27,15 @@ from plotter import PlotEngine
 
 def time_parser(dt:str):
     dttime = [int(i) for i in re.split('[ _ \- : ]',dt)]
-    timestamp = dttime[0]*100000000 + int(100*dttime[1]/12)*1000000 + int(100*dttime[2]/(30 + dttime[1]%12))*10000 + int(100*dttime[3]/24)*100 + int(100*dttime[4]/60)
+    timestamp = dttime[0]*100000000 + int(100*dttime[1]/12)*1000000 + int(100*dttime[2]/(31))*10000 + int(100*dttime[3]/24)*100 + int(100*dttime[4]/60)
     return timestamp
-
-
 
 #load files 
 def load_data(fname,stdt=0,enddt=99999999):
     matches = pd.read_csv(fname)
     matches["timestamp"] = matches.apply(lambda row: time_parser(row['date_time']),axis=1)
-    matches.sort_values(by=["timestamp"])
-    # for ind,row in matches.iterrows():
-    #     matches.at[ind,'date_time'] = int(date_parser(row['date_time']))
-    #sort this dataframe based on column date_time
-    #filter matches such that result column is not equal to 'D'
     matches = matches[matches['result']!='D']
+    matches.sort_values(by=["timestamp"],inplace=True)
     print(matches[matches['usr_id']==4145].to_json())
 
     return matches
@@ -55,12 +49,14 @@ def evaluateData(matches,fname,p_ids):
     player_ratings = {}
     count = 0
     print('Dataset size',len(matches))
-    for ind,row in tqdm(matches.iterrows(), total=len(matches), desc="Processing matches"):
+    for ind,row in matches.iterrows(): # tqdm(matches.iterrows(), total=len(matches), desc="Processing matches"):
         p1_id = row["usr_id"]
         p2_id = row["oppnt_id"]
         if 3300 in [p1_id,p2_id]:
             count += 1
         scoreline = row['score']    
+        if 72 in [p1_id,p2_id]:
+            print(row['timestamp'])
         for player_id in [p1_id, p2_id]:
             if player_id not in player_ratings:
                 player_ratings[player_id] = {"Rating": 1500, "RD": 200}

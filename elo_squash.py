@@ -17,15 +17,18 @@ def parse_score(score:str):
 
 def time_parser(dt:str):
     dttime = [int(i) for i in re.split('[ _ \- : ]',dt)]
-    timestamp = dttime[0]*100000000 + int(100*dttime[1]/12)*1000000 + int(100*dttime[2]/(30 + dttime[1]%12))*10000 + int(100*dttime[3]/24)*100 + int(100*dttime[4]/60)
+    timestamp = dttime[0]*100000000 + int(100*dttime[1]/12)*1000000 + int(100*dttime[2]/31)*10000 + int(100*dttime[3]/24)*100 + int(100*dttime[4]/60)
     return timestamp
 
 def clean_data(filename:str):
     matches = pd.read_csv(filename)
-    matches["timestamp"] = matches.apply(lambda row: time_parser(row['date_time']),axis=1)
-    matches.sort_values(by=["timestamp"])
     matches = matches[matches['result']!='D']
-    print(matches[matches['usr_id']==4145].to_json())
+    matches["timestamp"] = matches.apply(lambda row: time_parser(row['date_time']),axis=1)
+    matches.sort_values(by=["timestamp"],inplace=True)
+    print('u',matches[matches['usr_id'] == 72])
+    print('o',matches[matches['oppnt_id'] == 72])
+
+    # print(matches[matches['usr_id']==4145].to_json())
     # Cleaning the data.... 
     '''
         Required Params:
@@ -90,13 +93,16 @@ def evaluateData(dataset,filename,begin_date=0,end_date=99999999):
     eloObj = Elo()
     name_id = {}
     count = 0
+    dataset.sort_values(by=["timestamp"],inplace=True)
     
     if arguments.debug:
         print('Dataset Shape',dataset.shape[0])
-    for i in range(dataset.shape[0]):
-        pdone = int(100*i/dataset.shape[0])
-        print('\r[',pdone*'=',(100-pdone)*'-',']',pdone,'\%',sep='',end='')
-        mtch = dataset.loc[i]
+    for idx, mtch in dataset.iterrows():
+        # pdone = int(100*i/dataset.shape[0])
+        # print('\r[',pdone*'=',(100-pdone)*'-',']',pdone,'\%',sep='',end='')
+        # mtch = dataset.loc[i]
+        if mtch['usr_id'] == 72 or mtch['oppnt_id'] == 72:
+            print(mtch['timestamp'])
         name_id[mtch['usr_id']] = mtch['usr_id'] # TODO: change this line @Varul 
         if mtch['usr_id'] not in players.keys():
             # graph[int(mtch['usr_id'])] = []

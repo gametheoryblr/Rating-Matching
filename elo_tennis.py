@@ -19,29 +19,22 @@ from src.v1.rating_elo.elo import Elo
 from src.util.ufuncs import date_parser, parse_score
 
 
-
+def time_parser(dt):
+    dt = int(dt)
+    dttime = [dt/10000,(dt%10000)/100,dt%100,0,0]
+    timestamp = dttime[0]*100000000 + int(100*dttime[1]/12)*1000000 + int(100*dttime[2]/31)*10000 + int(100*dttime[3]/24)*100 + int(100*dttime[4]/60)
+    return timestamp
 
 #load files 
-def load_data(fname):
+def load_data(fname,stdt=0,enddt=99999999):
     matches = pd.read_csv(fname)
     # filter dataset 
-    matches_dropset = ['tourney_name', 'surface', 'draw_size', 'winner_seed', 'winner_entry',
-        'winner_hand', 'winner_ht', 'winner_ioc', 'winner_age', 'loser_seed', 'loser_entry', 'loser_hand', 'loser_ht', 
-        'loser_ioc', 'loser_age', 'winner_rank_points', 'loser_rank_points', 'round','minutes', 'w_ace', 'w_df', 
-        'w_svpt', 'w_1stIn', 'w_1stWon', 'w_2ndWon', 'w_SvGms', 'w_bpSaved', 'w_bpFaced', 'l_ace', 'l_df', 'l_svpt',
-        'l_1stIn', 'l_1stWon', 'l_2ndWon', 'l_SvGms', 'l_bpSaved', 'l_bpFaced', 'winner_rank', 'loser_rank']
-    try:
-        matches.drop(matches_dropset,inplace=True,axis=1)
-    except Exception as e:
-        print("Keys not found")
-
-
-    md = matches.to_dict()
-    data = {}
-    for i in md['tourney_id'].keys():
-        data[md['tourney_date'][i]*1000 + md['match_num'][i]] = md
-    dataset = pd.DataFrame.from_dict(md)
-    return dataset
+    matches = matches[matches["tourney_date"]>=stdt]
+    matches = matches[matches["tourney_date"]<=enddt]
+    
+    matches["timestamp"] = matches.apply(lambda row: time_parser(row['tourney_date']),axis=1)
+    matches.sort_values(by=["timestamp"],inplace=True)
+    return matches 
 
 def evaluateData(dataset,filename, begin_date=0,end_date=99999999):
     players = {}
@@ -50,11 +43,12 @@ def evaluateData(dataset,filename, begin_date=0,end_date=99999999):
     eloObj = Elo()
     name_id = {} # will store meta information 
 
-    for i in range(dataset.shape[0]):
-        pdone = int(100*i/dataset.shape[0])
-        print('\r',pdone,end=' ')
-        print('\r[',pdone*'=',(100-pdone)*'-',']',pdone,'\%',sep='',end='')
-        mtch = dataset.loc[i]
+    # for i in range(dataset.shape[0]):
+    for idx,mtch in dataset.iterrows():
+        # pdone = int(100*i/dataset.shape[0])
+        # print('\r',pdone,end=' ')
+        # print('\r[',pdone*'=',(100-pdone)*'-',']',pdone,'\%',sep='',end='')
+        # mtch = dataset.loc[i]
         if mtch['tourney_date'] < begin_date or mtch['tourney_date'] > end_date:
             continue
         name_id[mtch['winner_name']] = mtch['winner_id']
@@ -69,11 +63,11 @@ def evaluateData(dataset,filename, begin_date=0,end_date=99999999):
         
         # difference in timing...
         dscore = date_parser(mtch['tourney_date'])
-        yr = (mtch['tourney_date'])/10000
-        mth = int(((mtch['tourney_date']%10000)/100)*100/12)
-        day = int(((mtch['tourney_date']%100))*100/(30 + (mth%2)))
-        time_st = str(yr*10000 + mth*100 + day)
-
+        # yr = (mtch['tourney_date'])/10000
+        # mth = int(((mtch['tourney_date']%10000)/100)*100/12)
+        # day = int(((mtch['tourney_date']%100))*100/(30 + (mth%2)))
+        # time_st = str(yr*10000 + mth*100 + day)
+        time_st = mtch['timestamp']
         if players[mtch['loser_name']].last_match == -1:
             players[mtch['loser_name']].last_match = dscore
         if players[mtch['winner_name']].last_match == -1:
@@ -94,6 +88,9 @@ def evaluateData(dataset,filename, begin_date=0,end_date=99999999):
             continue
         winner_stat = max(match_ratings[0],match_ratings[1])/(float(match_ratings[0]) + match_ratings[1])
         loser_stat = 1 - winner_stat
+
+        while time_st in prat[mtch['loser_name']].keys() or time_st in prat[mtch['winner_name']].keys():
+            time_st += 1
 
         plerr[mtch['loser_name']][time_st] = (abs(pred - loser_stat))        # might need to change this 
         plerr[mtch['winner_name']][time_st] = (abs(1 - pred - winner_stat))  # might need to change this 

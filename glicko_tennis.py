@@ -21,15 +21,21 @@ from plotter import PlotEngine
 # codebase imports 
 from src.Glicko2.glicko2 import Player
 
+def time_parser(dt):
+    dt = int(dt)
+    dttime = [dt/10000,(dt%10000)/100,dt%100,0,0]
+    timestamp = dttime[0]*100000000 + int(100*dttime[1]/12)*1000000 + int(100*dttime[2]/31)*10000 + int(100*dttime[3]/24)*100 + int(100*dttime[4]/60)
+    return timestamp
+
 #load files 
 def load_data(fname,stdt=0,enddt=99999999):
     matches = pd.read_csv(fname)
     # filter dataset 
-    matches = matches[['tourney_id', 'tourney_name', 'surface', 'draw_size', 'tourney_level', 'tourney_date', 'match_num', 'winner_id', 'winner_name','loser_id', 'loser_name', 'score', 'best_of', 'round']]
-    # filter dataframe where tourney_date is between 2014 and 2016
     matches = matches[matches["tourney_date"]>=stdt]
     matches = matches[matches["tourney_date"]<=enddt]
-    return matches
+    matches["timestamp"] = matches.apply(lambda row: time_parser(row['tourney_date']),axis=1)
+    matches.sort_values(by=["timestamp"],inplace=True)
+    return matches 
 
 def evaluateData(matches,opFname,p_ids):
 
@@ -37,7 +43,7 @@ def evaluateData(matches,opFname,p_ids):
     player_ratings = {}
     plerr = {}
     prat = {}
-    for ind,row in tqdm(matches.iterrows(), total=len(matches), desc="Processing matches"):
+    for ind,row in matches.iterrows():# tqdm(matches.iterrows(), total=len(matches), desc="Processing matches"):
         winner_id = row["winner_name"]
         loser_id = row["loser_name"]
             
@@ -67,12 +73,10 @@ def evaluateData(matches,opFname,p_ids):
         loser.update_player([w_rating],[w_rd],[0])
         
         # convert time to desired format here 
-        tst = int(row['tourney_date']) # yyyymmdd 
-        yr = int(tst/10000)
-        mth = int((tst%10000)/100)
-        day = int(tst%100)
-        timestamp = yr*10000 + int(100*(mth/12))*100 + int(100*(day/(30+mth%2)))
-
+        timestamp = row['timestamp']
+        while timestamp in prat[loser_id].keys() or timestamp in prat[winner_id].keys():
+            timestamp += 1
+        
         player_ratings[winner_id]['Rating'] = winner.getRating()
         prat[winner_id][timestamp] = winner.getRating()
         player_ratings[winner_id]['RD'] = winner.getRd()
