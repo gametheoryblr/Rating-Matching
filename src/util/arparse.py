@@ -6,7 +6,7 @@ def parseArguments(args:list):
     parser.add_argument(
         '--dataset',help='Enter Dataset to use for the script',type=str,default=None)
     parser.add_argument(
-        '--display',help='Display datewise/matchwise',type=str,default='matchwise')
+        '--display',help='Display datewise/matchwise',type=str,default=None)
     parser.add_argument(
         '--mapper',help='Mapper (maps id to name)',type=str,default=None)
     parser.add_argument(

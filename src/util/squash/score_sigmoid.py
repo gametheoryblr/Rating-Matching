@@ -2,6 +2,8 @@ import ast
 
 def score_sigmoid(scoreline):
     scoreline = ast.literal_eval(scoreline)
+    if type(scoreline[0]) != type([]):
+        scoreline = [scoreline]
     try:
         size = len(scoreline)
         win_bonus = 0.25
