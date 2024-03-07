@@ -5,7 +5,7 @@ import csv
 import json
 from constants import THRESHOLD_MATCHES_BETWEEN_TWO_PLAYERS
 
-df = pd.read_csv("../dataset/squash_dataset.csv")
+df = pd.read_csv("../dataset/squash_dataset_expanded.csv")
 dict = {}
 
 for _, row in df.iterrows():
