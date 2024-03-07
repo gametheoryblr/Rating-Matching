@@ -31,7 +31,6 @@ def load_data(fname,stdt=0,enddt=99999999):
     # filter dataset 
     matches = matches[matches["tourney_date"]>=stdt]
     matches = matches[matches["tourney_date"]<=enddt]
-    
     matches["timestamp"] = matches.apply(lambda row: time_parser(row['tourney_date']),axis=1)
     matches.sort_values(by=["timestamp"],inplace=True)
     return matches 
