@@ -37,4 +37,4 @@ class Elo:
         if self.__elo_type == EloType.vanilla:
             return self.vanilla_elo(old_ratings,delta,result,time)
         if self.__elo_type == EloType.temporal_continuous:
-            return self.temporal_elo(old_ratings,delta,result,np.log(time))
+            return self.temporal_elo(old_ratings,delta,result,1) # timestamping is not making much difference so omitted for now 
