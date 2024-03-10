@@ -1,3 +1,4 @@
+import ast 
 import sys
 import datetime
 import pandas as pd
@@ -69,7 +70,7 @@ def get_rating(score:list,result='W'):
     score_p1 = 0
     w0 = 0 
     w1 = 0
-    winning_bonus = 0.25
+    winning_bonus = 0.5
     multiplication_factor = (1 - winning_bonus)/len(score)
     for st in score:
         if st[0] > st[1]:
@@ -107,35 +108,53 @@ def evaluateData(dataset,filename,begin_date=0,end_date=99999999):
         print('\r[',pdone*'=',(100-pdone)*'-',']',pdone,'\%',sep='',end='')
         i += 1
         # mtch = dataset.loc[i]
-        if mtch['usr_id'] not in players.keys():
-            players[mtch['usr_id']] = Squash(mtch['usr_id'],mtch['usr_id'])
-            prat[str(mtch['usr_id'])] = {}
-            plerr[str(mtch['usr_id'])] = {}
-        if mtch['oppnt_id'] not in players.keys():
-            players[mtch['oppnt_id']] = Squash(mtch['oppnt_id'],mtch['oppnt_id'])
-            prat[str(mtch['oppnt_id'])] = {}
-            plerr[str(mtch['oppnt_id'])] = {}
-
+        player1 = mtch['user_id']
+        player2 = mtch['partner']
+        opponent1 = ast.literal_eval(mtch['opponent'])[0]
+        opponent2 = ast.literal_eval(mtch['opponent'])[1]
+        # print(player1,player2,opponent1,opponent2)
+        if player1 not in players.keys():
+            players[player1] = Squash(player1,player1)
+            prat[str(player1)] = {}
+            plerr[str(player1)] = {}
+        if player2 not in players.keys():
+            players[player2] = Squash(player2,player2)
+            prat[str(player2)] = {}
+            plerr[str(player2)] = {}
+        if opponent1 not in players.keys():
+            players[opponent1] = Squash(opponent1,opponent1)
+            prat[str(opponent1)] = {}
+            plerr[str(opponent1)] = {}
+        if opponent2 not in players.keys():
+            players[opponent2] = Squash(opponent2,opponent2)
+            prat[str(opponent2)] = {}
+            plerr[str(opponent2)] = {}
+        
         # difference in timing...
         timestamp = int(mtch['timestamp'])
-        while timestamp in prat[str(mtch['oppnt_id'])].keys() or timestamp in prat[str(mtch['usr_id'])].keys():
+        while timestamp in prat[str(opponent1)].keys() or timestamp in prat[str(opponent2)].keys() or timestamp in prat[str(player1)].keys() or timestamp in prat[str(player2)].keys():
             timestamp += 1
         
         #TODO:@Varul add date parser here (for datewise stuff)
-
-        if players[mtch['oppnt_id']].last_match == -1:
-            players[mtch['oppnt_id']].last_match = timestamp
-        if players[mtch['usr_id']].last_match == -1:
-            players[mtch['usr_id']].last_match = timestamp
+        if players[player1].last_match == -1:
+            players[player1].last_match = timestamp
+        if players[player2].last_match == -1:
+            players[player2].last_match = timestamp
+        if players[opponent1].last_match == -1:
+            players[opponent1].last_match = timestamp
+        if players[opponent2].last_match == -1:
+            players[opponent2].last_match = timestamp
 
         # This difference in time from last match will be passed as the argument to update the score...
         # 1 is added to keep the value of k_loser/k_winner >= 0
-        k_winner = abs(timestamp - players[mtch['usr_id']].last_match + 1)
-        k_loser = abs(timestamp - players[mtch['oppnt_id']].last_match + 1)
+        k_winner = abs(timestamp - (players[player1].last_match + players[player2].last_match)/2 + 1)
+        k_loser = abs(timestamp - (players[opponent1].last_match + players[opponent2].last_match)/2 + 1)
         
-        players[mtch['oppnt_id']].updateTime(timestamp)
-        players[mtch['usr_id']].updateTime(timestamp)
-        delta = players[mtch['usr_id']].rating - players[mtch['oppnt_id']].rating
+        players[opponent1].updateTime(timestamp)
+        players[opponent2].updateTime(timestamp)
+        players[player1].updateTime(timestamp)
+        players[player2].updateTime(timestamp)
+        delta = ((players[player1].rating + players[player2].rating) - (players[opponent1].rating + players[opponent2].rating))/2
         # predict result of the match 
         pred = eloObj.predict(delta) 
         match_ratings = get_rating(parse_score(mtch['score']))
@@ -150,21 +169,33 @@ def evaluateData(dataset,filename,begin_date=0,end_date=99999999):
         # else: 
         #     plerr[str(mtch['oppnt_id'])][timestamp] = (abs(pred - match_ratings[1]))        # loss for opponent
         #     plerr[str(mtch['usr_id'])][timestamp] = (abs(1 - pred - match_ratings[0]))  # loss for winner 
+        # prev_rating = players[mtch['usr_id']].rating 
         if match_ratings[0] > match_ratings[1]: # mtch['result'] == 'W':
-            players[mtch['usr_id']].rating = eloObj.elo_rate(players[mtch['usr_id']].rating,-1*delta,winner_stat,k_winner)
-            players[mtch['usr_id']].wins +=1 
+            players[player1].rating = eloObj.elo_rate(players[player1].rating,-1*delta,winner_stat,k_winner)
+            players[player1].wins +=1 
+            players[player2].rating = eloObj.elo_rate(players[player2].rating,-1*delta,winner_stat,k_winner)
+            players[player2].wins +=1 
             
-            players[mtch['oppnt_id']].rating = eloObj.elo_rate(players[mtch['oppnt_id']].rating,delta,loser_stat,k_loser)
-            players[mtch['oppnt_id']].lose += 1
+            players[opponent1].rating = eloObj.elo_rate(players[opponent1].rating,delta,loser_stat,k_loser)
+            players[opponent1].lose += 1
+            players[opponent2].rating = eloObj.elo_rate(players[opponent2].rating,delta,loser_stat,k_loser)
+            players[opponent2].lose += 1
         else:
-            players[mtch['oppnt_id']].rating = eloObj.elo_rate(players[mtch['oppnt_id']].rating,delta,winner_stat,k_winner)
-            players[mtch['oppnt_id']].wins +=1 
+            players[opponent1].rating = eloObj.elo_rate(players[opponent1].rating,delta,winner_stat,k_winner)
+            players[opponent1].wins +=1 
+            players[opponent2].rating = eloObj.elo_rate(players[opponent2].rating,delta,winner_stat,k_winner)
+            players[opponent2].wins +=1 
             
-            players[mtch['usr_id']].rating = eloObj.elo_rate(players[mtch['usr_id']].rating,-1*delta,loser_stat,k_loser)
-            players[mtch['usr_id']].lose += 1
+            players[player1].rating = eloObj.elo_rate(players[player1].rating,-1*delta,loser_stat,k_loser)
+            players[player1].lose += 1
+            players[player2].rating = eloObj.elo_rate(players[player2].rating,-1*delta,loser_stat,k_loser)
+            players[player2].lose += 1
 
-        prat[str(mtch['oppnt_id'])][timestamp]  = players[mtch['oppnt_id']].rating
-        prat[str(mtch['usr_id'])][timestamp]  = players[mtch['usr_id']].rating
+        
+        prat[str(opponent1)][timestamp]  = players[opponent1].rating
+        prat[str(opponent2)][timestamp]  = players[opponent2].rating
+        prat[str(player1)][timestamp]  = players[player1].rating
+        prat[str(player2)][timestamp]  = players[player2].rating
         
     print()
     print('Done training on data')    

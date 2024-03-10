@@ -1,6 +1,6 @@
 # system imports 
 import sys
-
+import ast 
 # library imports 
 import os
 import pandas as pd 
@@ -53,22 +53,26 @@ def evaluateData(matches,fname,p_ids):
     player_ratings = {}
     count = 0
     for ind,row in matches.iterrows(): # tqdm(matches.iterrows(), total=len(matches), desc="Processing matches"):
-        p1_id = row["usr_id"]
-        p2_id = row["oppnt_id"]
-        if 3300 in [p1_id,p2_id]:
-            count += 1
+        p1_id = row["user_id"]
+        p2_id = row["partner"]
+        p3_id = ast.literal_eval(row['opponent'])[0]
+        p4_id = ast.literal_eval(row['opponent'])[1]
+        
         scoreline = row['score']    
-        for player_id in [p1_id, p2_id]:
+        for player_id in [p1_id, p2_id, p3_id, p4_id]:
             if player_id not in player_ratings:
                 player_ratings[player_id] = {"Rating": 1500, "RD": 200}
             if player_id not in prat.keys():
                 prat[player_id] = {} 
                 plerr[player_id] = {} 
-        
         p1_rating = player_ratings[p1_id]['Rating']
         p1_rd = player_ratings[p1_id]['RD']
         p2_rating = player_ratings[p2_id]['Rating']
         p2_rd = player_ratings[p2_id]['RD']
+        p3_rating = player_ratings[p3_id]['Rating']
+        p3_rd = player_ratings[p3_id]['RD']
+        p4_rating = player_ratings[p4_id]['Rating']
+        p4_rd = player_ratings[p4_id]['RD']
         
         #setting up p1
         p1 = Player()
@@ -79,7 +83,21 @@ def evaluateData(matches,fname,p_ids):
         p2 = Player()
         p2.setRating(player_ratings[p2_id]['Rating'])
         p2.setRd(player_ratings[p2_id]['RD'])
+        
+        #setting up p3
+        p3 = Player()
+        p3.setRating(player_ratings[p3_id]['Rating'])
+        p3.setRd(    player_ratings[p3_id]['RD'])
+        
+        #Setting up p4
+        p4 = Player()
+        p4.setRating(player_ratings[p4_id]['Rating'])
+        p4.setRd(player_ratings[p4_id]['RD'])
+        
+        
+        
         # print("scoreline",scoreline)
+        
         oc1,oc2 = score_sigmoid(scoreline) 
         if oc1 > oc2: # row['result']=='W':
             oc = max(oc1,oc2)
@@ -89,18 +107,29 @@ def evaluateData(matches,fname,p_ids):
             oc = 0.5
         
         timestamp = int(row['timestamp'])
-        while timestamp in prat[p1_id].keys() or timestamp in prat[p2_id].keys():
+        while timestamp in prat[p1_id].keys() or timestamp in prat[p2_id].keys() or timestamp in prat[p3_id].keys() or timestamp in prat[p4_id].keys():
             timestamp += 1
         p1.update_player([p2_rating],[p2_rd],[oc])
         p2.update_player([p1_rating],[p1_rd],[1-oc])
+        p3.update_player([p3_rating],[p3_rd],[oc])
+        p4.update_player([p4_rating],[p4_rd],[1-oc])
+
         player_ratings[p1_id]['Rating'] = p1.getRating()
         prat[p1_id][timestamp] = p1.getRating()
         player_ratings[p1_id]['RD'] = p1.getRd()
+
         player_ratings[p2_id]['Rating'] = p2.getRating()
         prat[p2_id][timestamp] = p2.getRating()
         player_ratings[p2_id]['RD'] = p2.getRd()
-        
 
+        player_ratings[p3_id]['Rating'] = p3.getRating()
+        prat[p3_id][timestamp] = p3.getRating()
+        player_ratings[p3_id]['RD'] = p3.getRd()
+
+        player_ratings[p4_id]['Rating'] = p4.getRating()
+        prat[p4_id][timestamp] = p4.getRating()
+        player_ratings[p4_id]['RD'] = p4.getRd()
+        
     masterdict = {
         'rating':prat,
         'error':plerr
@@ -129,4 +158,3 @@ if __name__ == '__main__':
     if arguments.display != None:
         plotter.load_data(arguments.output,'glicko')
         plotter.plot_ratings(subFilter,arguments.percentage)
-
