@@ -203,7 +203,7 @@ def evaluateData(dataset,filename,begin_date=0,end_date=99999999):
         'rating':prat,
         'error':plerr
     }
-    with open(filename,'w') as fp:
+    with open(filename,'w+') as fp:
         json.dump(final_dict,fp)
 
 if __name__ == '__main__':

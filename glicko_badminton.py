@@ -134,7 +134,7 @@ def evaluateData(matches,fname,p_ids):
         'rating':prat,
         'error':plerr
     }
-    with open(fname,'w') as fp:
+    with open(fname,'w+') as fp:
         json.dump(masterdict,fp)
 
     # Concatenate all dataframes in the list

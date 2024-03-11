@@ -69,7 +69,7 @@ def get_rating(score:list,result='W'):
     score_p1 = 0
     w0 = 0 
     w1 = 0
-    winning_bonus = 0.25
+    winning_bonus = 0.4 # 0.25
     multiplication_factor = (1 - winning_bonus)/len(score)
     for st in score:
         if st[0] > st[1]:
@@ -153,7 +153,7 @@ def evaluateData(dataset,filename,begin_date=0,end_date=99999999):
         # else: 
         #     plerr[str(mtch['oppnt_id'])][timestamp] = (abs(pred - match_ratings[1]))        # loss for opponent
         #     plerr[str(mtch['usr_id'])][timestamp] = (abs(1 - pred - match_ratings[0]))  # loss for winner 
-        if mtch['result'] == 'W':
+        if match_ratings[0] > match_ratings[1]: # mtch['result'] == 'W':
             players[mtch['usr_id']].rating = eloObj.elo_rate(players[mtch['usr_id']].rating,-1*delta,winner_stat,k_winner)
             players[mtch['usr_id']].wins +=1 
             
@@ -179,7 +179,7 @@ def evaluateData(dataset,filename,begin_date=0,end_date=99999999):
         'rating':prat,
         'error':plerr
     }
-    with open(filename,'w') as fp:
+    with open(filename,'w+') as fp:
         json.dump(final_dict,fp)
 
 if __name__ == '__main__':

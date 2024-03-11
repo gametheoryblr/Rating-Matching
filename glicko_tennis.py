@@ -105,7 +105,7 @@ def evaluateData(matches,opFname,p_ids):
     } 
     print('Prat',prat)
     print('Master dict',masterdict)
-    with open(opFname,'w') as fp:
+    with open(opFname,'w+') as fp:
         json.dump(masterdict,fp)
 
     return df
