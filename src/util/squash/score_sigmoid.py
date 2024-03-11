@@ -6,7 +6,7 @@ def score_sigmoid(scoreline):
         scoreline = [scoreline]
     try:
         size = len(scoreline)
-        win_bonus = 0.25
+        win_bonus = 0.4
         set_fraction = (1-win_bonus)/size
 
         p1_score=0 # final score for p1
