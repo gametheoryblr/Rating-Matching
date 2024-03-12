@@ -6,7 +6,8 @@ import json
 import ast
 from constants import THRESHOLD_MATCHES_BETWEEN_TWO_PLAYERS
 
-df = pd.read_csv("../../../data/badminton_dataset_doubles.csv")
+df = pd.read_csv("../../../data/badminton_dataset_doubles_unique.csv")
+# df = pd.read_csv("../dataset/check_cluster_doubles.csv")
 dict = {}
 
 #print(ast.literal_eval(df['opponent'][0])[0])
