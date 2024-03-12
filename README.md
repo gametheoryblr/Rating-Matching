@@ -50,3 +50,75 @@ $ python3 glicko_squash.py ./dataset/squash_dataset.py [datewise] [input_file]
 3. Update the player's Rating and RD.
 4. Store the updated values.
 
+
+# COMMANDS 
+
+
+## Tennis 
+
+> Elo Tennis with training (put --train 0 for not training) and datewise plot 
+```sh
+ python3 elo_tennis.py --dataset ./dataset/atp_matches_till_2022.csv --output elo_tennis.json --display datewise --plot_path outputs --input ./inputs/in1.json --train 1 
+ ```
+
+> Elo Tennis with training (put --train 0 for not training) and matchwise plot 
+```sh
+ python3 elo_tennis.py --dataset ./dataset/atp_matches_till_2022.csv --output elo_tennis.json --display matchwise --plot_path outputs --input ./inputs/in1.json --train 1 
+ ```
+
+> Glicko Tennis with training (put --train 0 for not training) and datewise plot 
+```sh
+ python3 glicko_tennis.py --dataset ./dataset/atp_matches_till_2022.csv --output glicko_tennis.json --display datewise --plot_path outputs --input ./inputs/in1.json --train 1 
+ ```
+
+> Glicko Tennis with training (put --train 0 for not training) and matchwise plot 
+```sh
+ python3 glicko_tennis.py --dataset ./dataset/atp_matches_till_2022.csv --output glicko_tennis.json --display matchwise --plot_path outputs --input ./inputs/in1.json --train 1 
+ ```
+
+
+## Squash 
+
+> Elo Squash with training (put --train 0 for not training) and datewise plot 
+```sh
+ python3 elo_squash.py --dataset ./dataset/squash_dataset_exco.csv --output elo_squash.json --display datewise --plot_path outputs --input ./inputs/in_squash_.json --train 1 
+ ```
+
+> Elo Squash with training (put --train 0 for not training) and matchwise plot 
+```sh
+ python3 elo_squash.py --dataset ./dataset/squash_dataset_exco.csv --output elo_squash.json --display matchwise --plot_path outputs --input ./inputs/in_squash_.json --train 1 
+ ```
+
+> Glicko Squash with training (put --train 0 for not training) and datewise plot 
+```sh
+ python3 glicko_squash.py --dataset ./dataset/squash_dataset_exco.csv --output glicko_squash.json --display datewise --plot_path outputs --input ./inputs/in_squash_.json --train 1 
+ ```
+
+> Glicko Squash with training (put --train 0 for not training) and matchwise plot 
+```sh
+ python3 glicko_squash.py --dataset ./dataset/squash_dataset_exco.csv --output glicko_squash.json --display matchwise --plot_path outputs --input ./inputs/in_squash_.json --train 1 
+ ```
+
+
+## Badminton
+
+> Glicko Badminton with training (put --train 0 for not training) and datewise plot 
+```sh
+ python3 glicko_badminton.py --dataset ./dataset/badminton_dataset.csv --output glicko_badminton.json --display datewise --plot_path outputs --input ./inputs/in_badminton.json --train 1 
+ ```
+
+> Glicko Badminton with training (put --train 0 for not training) and matchwise plot 
+```sh
+ python3 glicko_badminton.py --dataset ./dataset/badminton_dataset.csv --output glicko_badminton.json --display matchwise --plot_path outputs --input ./inputs/in_badminton.json --train 1 
+ ```
+
+> Elo Badminton with training (put --train 0 for not training) and datewise plot 
+```sh
+ python3 elo_badminton.py --dataset ./dataset/badminton_dataset.csv --output elo_badminton.json --display datewise --plot_path outputs --input ./inputs/in_badminton.json --train 1 
+ ```
+
+> Elo Badminton with training (put --train 0 for not training) and matchwise plot 
+```sh
+ python3 elo_badminton.py --dataset ./dataset/badminton_dataset.csv --output elo_badminton.json --display matchwise --plot_path outputs --input ./inputs/in_badminton.json --train 1 
+ ```
+
