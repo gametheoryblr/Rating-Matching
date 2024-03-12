@@ -25,4 +25,6 @@ def parseArguments(args:list):
         '--train',help='true/false (train or use a pre-loaded file)',type=int, default=0)
     parser.add_argument(
         '--percentage',help='percentage of players to randomly sample',type=float,default=1.0)
+    parser.add_argument(
+        '--winner_bonus',help='winner bonus point (faction of total points) [0,1]',type=float,default=1.0)
     return  parser.parse_args()

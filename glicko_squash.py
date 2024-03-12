@@ -18,7 +18,7 @@ import re
 
 # codebase imports 
 from src.Glicko2.glicko2 import Player
-from src.util.squash.score_sigmoid import score_sigmoid
+from src.util.ufuncs import get_rating
 # from src.util.squash.date_parser import date_parser
 
 from src.util.arparse import parseArguments
@@ -83,10 +83,10 @@ def evaluateData(matches,fname,p_ids):
         p2.setRating(player_ratings[p2_id]['Rating'])
         p2.setRd(player_ratings[p2_id]['RD'])
         # print("scoreline",scoreline)
-        oc1,oc2 = score_sigmoid(scoreline) 
-        if row['result']=='W':
+        oc1,oc2 = get_rating(scoreline) 
+        if oc1 > oc2: # row['result']=='W':
             oc = max(oc1,oc2)
-        elif row['result']=='L':
+        elif oc1 < oc2: # row['result']=='L':
             oc = min(oc1,oc2)
         else:
             oc = 0.5
@@ -94,8 +94,6 @@ def evaluateData(matches,fname,p_ids):
         timestamp = int(row['timestamp'])
         while timestamp in prat[p1_id].keys() or timestamp in prat[p2_id].keys():
             timestamp += 1
-        if p1_id == 4145 or p2_id == 4145:
-            print(timestamp)
         p1.update_player([p2_rating],[p2_rd],[oc])
         p2.update_player([p1_rating],[p1_rd],[1-oc])
         player_ratings[p1_id]['Rating'] = p1.getRating()
@@ -111,7 +109,7 @@ def evaluateData(matches,fname,p_ids):
         'rating':prat,
         'error':plerr
     }
-    with open(fname,'w') as fp:
+    with open(fname,'w+') as fp:
         json.dump(masterdict,fp)
 
     # Concatenate all dataframes in the list

@@ -31,9 +31,9 @@ class Elo:
 
     def elo_rate(self,old_ratings,delta,result,time=1):
         if old_ratings > 2000:
-            self.k = 8
-        else:
             self.k = 16
+        else:
+            self.k = 32
         if self.__elo_type == EloType.vanilla:
             return self.vanilla_elo(old_ratings,delta,result,time)
         if self.__elo_type == EloType.temporal_continuous:
