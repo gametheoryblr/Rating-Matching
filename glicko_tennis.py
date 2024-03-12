@@ -16,7 +16,7 @@ from tqdm import tqdm
 
 from src.util.arparse import parseArguments
 from plotter import PlotEngine
-
+from src.util.ufuncs import get_rating
 
 # codebase imports 
 from src.Glicko2.glicko2 import Player
@@ -26,6 +26,16 @@ def time_parser(dt):
     dttime = [dt/10000,(dt%10000)/100,dt%100,0,0]
     timestamp = dttime[0]*100000000 + int(100*dttime[1]/12)*1000000 + int(100*dttime[2]/31)*10000 + int(100*dttime[3]/24)*100 + int(100*dttime[4]/60)
     return timestamp
+
+def parse_score(score:str):
+    sc = []
+    for st in score.split(' '):
+        sc.append([0,0])
+        idx = 0
+        for pt in st.split('-'):
+            sc[-1][idx] = int(pt)
+            idx+=1
+    return sc
 
 #load files 
 def load_data(fname,stdt=0,enddt=99999999):
@@ -68,9 +78,12 @@ def evaluateData(matches,opFname,p_ids):
         loser = Player()
         loser.setRating(player_ratings[loser_id]['Rating'])
         loser.setRd(player_ratings[loser_id]['RD'])
-        
-        winner.update_player([l_rating],[l_rd],[1])
-        loser.update_player([w_rating],[w_rd],[0])
+        try:           
+           scoreline = get_rating(parse_score(row['score']))
+        except Exception as e:
+            continue
+        winner.update_player([l_rating],[l_rd],[scoreline[0]])
+        loser.update_player([w_rating],[w_rd],[scoreline[1]])
         
         # convert time to desired format here 
         timestamp = row['timestamp']

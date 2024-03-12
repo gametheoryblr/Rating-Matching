@@ -13,12 +13,11 @@ import pandas as pd
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 import json
-from tqdm import tqdm
 import re
 
 # codebase imports 
 from src.Glicko2.glicko2 import Player
-from src.util.squash.score_sigmoid import score_sigmoid
+from src.util.ufuncs import get_rating
 # from src.util.squash.date_parser import date_parser
 
 from src.util.arparse import parseArguments
@@ -98,7 +97,7 @@ def evaluateData(matches,fname,p_ids):
         
         # print("scoreline",scoreline)
         
-        oc1,oc2 = score_sigmoid(scoreline) 
+        oc1,oc2 = get_rating(scoreline) 
         if oc1 > oc2: # row['result']=='W':
             oc = max(oc1,oc2)
         elif oc1 < oc2: # row['result']=='L':

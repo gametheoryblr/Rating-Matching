@@ -14,16 +14,33 @@ from plotter import PlotEngine
 
 # codebase imports 
 from src.util.arparse import parseArguments
-from src.util.tennis.rating import Tennis as Player,get_rating
+from src.util.tennis.rating import Tennis
 from src.v1.rating_elo.elo import Elo 
-from src.util.ufuncs import date_parser, parse_score
+from src.util.ufuncs import get_rating
 
-
+# time-parser will be different for each dataset 
 def time_parser(dt):
     dt = int(dt)
     dttime = [dt/10000,(dt%10000)/100,dt%100,0,0]
     timestamp = dttime[0]*100000000 + int(100*dttime[1]/12)*1000000 + int(100*dttime[2]/31)*10000 + int(100*dttime[3]/24)*100 + int(100*dttime[4]/60)
     return timestamp
+
+def date_parser(date:int):
+    yr = date/10000
+    month = (date%10000)/100
+    day = (date%100)
+    time_score = (yr - 1950)*365 + (month-1)*30 + day
+    return time_score
+
+def parse_score(score:str):
+    sc = []
+    for st in score.split(' '):
+        sc.append([0,0])
+        idx = 0
+        for pt in st.split('-'):
+            sc[-1][idx] = int(pt)
+            idx+=1
+    return sc
 
 #load files 
 def load_data(fname,stdt=0,enddt=99999999):
@@ -35,7 +52,7 @@ def load_data(fname,stdt=0,enddt=99999999):
     matches.sort_values(by=["timestamp"],inplace=True)
     return matches 
 
-def evaluateData(dataset,filename, begin_date=0,end_date=99999999):
+def evaluateData(dataset,filename,winner_bonus, begin_date=0,end_date=99999999):
     players = {}
     prat = {}
     plerr = {}
@@ -52,11 +69,11 @@ def evaluateData(dataset,filename, begin_date=0,end_date=99999999):
             continue
         name_id[mtch['winner_name']] = mtch['winner_id']
         if mtch['winner_name'] not in players.keys():
-            players[mtch['winner_name']] = Player(mtch['winner_id'],mtch['winner_name'])
+            players[mtch['winner_name']] = Tennis(mtch['winner_id'],mtch['winner_name'])
             prat[mtch['winner_name']] = {}
             plerr[mtch['winner_name']] = {}
         if mtch['loser_name'] not in players.keys():
-            players[mtch['loser_name']] = Player(mtch['loser_id'],mtch['loser_name'])
+            players[mtch['loser_name']] = Tennis(mtch['loser_id'],mtch['loser_name'])
             prat[mtch['loser_name']] = {}
             plerr[mtch['loser_name']] = {}
         
@@ -81,7 +98,7 @@ def evaluateData(dataset,filename, begin_date=0,end_date=99999999):
         pred = eloObj.predict(delta) # probability of a person with rating ``advantage`` DELTA winning?? 
         try:
             # get result of the match (statistically)
-            match_ratings = get_rating(parse_score(mtch['score']))
+            match_ratings = get_rating(parse_score(mtch['score']),winner_bonus)
         except Exception as e:
             # print("Skipped ",mtch)
             continue
@@ -126,6 +143,6 @@ if __name__ == '__main__':
     print(arguments.train,type(arguments.train))
     if arguments.train == 1: 
         dataset = load_data(arguments.dataset)
-        evaluateData(dataset,arguments.output,stdt,endt)
+        evaluateData(dataset,arguments.output,arguments.winner_bonus,stdt,endt)
     plotter.load_data(arguments.output)
     plotter.plot_ratings(subFilter,arguments.percentage)
