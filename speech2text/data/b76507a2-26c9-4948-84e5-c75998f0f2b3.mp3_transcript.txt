@@ -1,0 +1,17 @@
+A Good morning. Welcome to game theory. How may I help you today?
+B Yeah, hi. So I just want to inquire about swimming classes. So still it's going on.
+A Yes, ma'am, we have classes available for swimming. You want to do coaching, right? Learn. Yes, I can help you with that, ma'am. We have two classes available.
+B Yeah, tell me.
+A One is a gold class and one is silver class. Gold classes cost you 48 classes for six months. Validity amount would be 17,999. Silver is for two months. Okay. And 24 classes amount would be 11,999, ma'am.
+B All right.
+A Okay.
+B And for kids?
+A Sure, ma'am, you can check and you can get back to us.
+B No, I'm asking like for kids. What is the kids?
+A For the age of starting from eight months to 3.5 years, the fees would be Rs6000.05. Nine. Nine. Nine. Only for eight classes. That will be on a weekend.
+B All right. And for adult. So it's like Monday to Friday or how is it?
+A Yes, Monday to Friday, ma'am.
+B Okay, got it. Thank you.
+A Monday it will be Monday. Yeah. The coach will tell you about the timing of the batches. Okay.
+B All right.
+A Thank you so much, ma'am. Have a great day. Bye.

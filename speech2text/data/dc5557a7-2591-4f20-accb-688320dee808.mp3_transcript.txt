@@ -1,0 +1,17 @@
+B Good afternoon, game theory. How may I help you today?
+A Just I spoke to ma'am regarding the classes for the kids in swimming pool.
+B Okay, for whom?
+A It's for a kid, sir. He's an eight year old child.
+B Okay.
+A So I just wanted to know the fee structure and can you send me the location so I can just come over there because I'm not finding your Google map.
+B You can get that information, ma'am.
+A Okay. I tried out but I could not fetch your address, sir.
+B No, it's easy. Just mention game theory basing Goodi branch. It will show you the location as well as this one.
+A Okay, sir. What will be the field structure for the child? Sir, for the swimming.
+B The child structure would be. Field structure for child would be starting from eight months to 3.5 years. It is 59998 classes, ma'am. Or only on weekends. Okay.
+A No, I just wanted him to go for the regular classes and he's an eight year old child.
+B No regular.
+A Classes.
+B No.
+A Okay, sir. Thank you, sir.
+B Thank you.

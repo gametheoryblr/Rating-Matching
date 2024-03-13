@@ -1,0 +1,11 @@
+A Hello. Game theory swimming pool, ma'am?
+B Yeah.
+A What's the service for a normal swimming pool?
+B It's Rs369 per hour per head.
+A 369, ma'am.
+B Yeah.
+A Just only 369?
+B Yes. Per person.
+A Okay. For ten members it will be any more or it will be only nine member head.
+B Yes. No, no discount for that.
+A No need discount, ma'am. Okay, we can come. Okay, we are coming.
