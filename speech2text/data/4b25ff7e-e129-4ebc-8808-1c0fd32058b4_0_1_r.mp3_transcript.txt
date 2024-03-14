@@ -1,1 +1,16 @@
 A Hi. Hush. This is Lenis from game theory. I can reschedule your free trial for tomorrow. 07:00 a.m. Is fine. Yeah. Is it okay? Like you'd be okay. You'll receive a reschedule on your email. Alright. Okay. Thank you. Okay. Thank you.
+A Hi. Hush. This is Lenis from game theory. I can reschedule your free trial for tomorrow. 07:00 a.m. Is fine. Yeah. Is it okay? Like you'd be okay. You'll receive a reschedule on your email. Alright. Okay. Thank you. Okay. Thank you.
+text='Hi.' start=8170 end=8334 confidence=0.5325648188591003 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Hush.' start=8372 end=8682 confidence=0.5020467638969421 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='This is Lenis from game theory.' start=8746 end=10890 confidence=0.8759028315544128 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='I can reschedule your free trial for tomorrow.' start=11050 end=13962 confidence=0.8298392295837402 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='07:00 a.m. Is fine.' start=14026 end=15440 confidence=0.7667248249053955 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Yeah.' start=15810 end=16560 confidence=0.5491449236869812 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Is it okay?' start=18130 end=18910 confidence=0.803144633769989 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="Like you'd be okay." start=18980 end=22638 confidence=0.5076069831848145 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="You'll receive a reschedule on your email." start=22724 end=26280 confidence=0.8672508001327515 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Alright.' start=26730 end=27238 confidence=0.570747971534729 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=27324 end=27670 confidence=0.5843517780303955 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Thank you.' start=27740 end=28262 confidence=0.8529649376869202 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Okay.' start=28316 end=28678 confidence=0.5843517780303955 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Thank you.' start=28764 end=29140 confidence=0.8529649376869202 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>

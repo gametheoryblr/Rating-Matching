@@ -1,1 +1,8 @@
 A Hello. Game theory, madam. Public game open here. Rs369 per hour per person. Per hour per person. Okay, madam.
+A Hello. Game theory, madam. Public game open here. Rs369 per hour per person. Per hour per person. Okay, madam.
+text='Hello.' start=2010 end=2222 confidence=0.5208578109741211 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Game theory, madam.' start=2276 end=6378 confidence=0.7622212171554565 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Public game open here.' start=6474 end=8478 confidence=0.8437744379043579 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Rs369 per hour per person.' start=8564 end=11774 confidence=0.7324323058128357 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Per hour per person.' start=11972 end=15760 confidence=0.7507104277610779 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay, madam.' start=17410 end=18170 confidence=0.7575031518936157 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>

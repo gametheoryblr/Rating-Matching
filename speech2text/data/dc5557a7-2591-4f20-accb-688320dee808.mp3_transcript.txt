@@ -15,3 +15,48 @@ A Classes.
 B No.
 A Okay, sir. Thank you, sir.
 B Thank you.
+B Good afternoon, game theory. How may I help you today?
+A Just I spoke to ma'am regarding the classes for the kids in swimming pool.
+B Okay, for whom?
+A It's for a kid, sir. He's an eight year old child.
+B Okay.
+A So I just wanted to know the fee structure and can you send me the location so I can just come over there because I'm not finding your Google map.
+B You can get that information, ma'am.
+A Okay. I tried out but I could not fetch your address, sir.
+B No, it's easy. Just mention game theory basing Goodi branch. It will show you the location as well as this one.
+A Okay, sir. What will be the field structure for the child? Sir, for the swimming.
+B The child structure would be. Field structure for child would be starting from eight months to 3.5 years. It is 59998 classes, ma'am. Or only on weekends. Okay.
+A No, I just wanted him to go for the regular classes and he's an eight year old child.
+B No regular.
+A Classes.
+B No.
+A Okay, sir. Thank you, sir.
+B Thank you.
+text='Good afternoon, game theory.' start=1050 end=2394 confidence=0.7207182049751282 speaker='B' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='How may I help you today?' start=2442 end=3680 confidence=0.7350953817367554 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="Just I spoke to ma'am regarding the classes for the kids in swimming pool." start=4450 end=10618 confidence=0.9193621873855591 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay, for whom?' start=10794 end=12270 confidence=0.7505903244018555 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="It's for a kid, sir." start=13730 end=14814 confidence=0.7502009272575378 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="He's an eight year old child." start=14852 end=16574 confidence=0.6201737523078918 speaker='A' sentiment=<SentimentType.negative: 'NEGATIVE'>
+text='Okay.' start=16772 end=17520 confidence=0.5843515396118164 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="So I just wanted to know the fee structure and can you send me the location so I can just come over there because I'm not finding your Google map." start=17890 end=29906 confidence=0.6019116640090942 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="You can get that information, ma'am." start=29938 end=31830 confidence=0.8394885659217834 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=32490 end=32902 confidence=0.5843515396118164 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='I tried out but I could not fetch your address, sir.' start=32956 end=35686 confidence=0.7877749800682068 speaker='A' sentiment=<SentimentType.negative: 'NEGATIVE'>
+text="No, it's easy." start=35788 end=37574 confidence=0.48760905861854553 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Just mention game theory basing Goodi branch.' start=37772 end=39778 confidence=0.8901373147964478 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='It will show you the location as well as this one.' start=39794 end=42040 confidence=0.8765531182289124 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay, sir.' start=42570 end=43606 confidence=0.7134824395179749 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='What will be the field structure for the child?' start=43708 end=45382 confidence=0.8965447545051575 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Sir, for the swimming.' start=45436 end=46786 confidence=0.788301408290863 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='The child structure would be.' start=46978 end=49094 confidence=0.7128133773803711 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Field structure for child would be starting from eight months to 3.5 years.' start=49132 end=54078 confidence=0.9138944745063782 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="It is 59998 classes, ma'am." start=54164 end=57258 confidence=0.867255449295044 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Or only on weekends.' start=57354 end=58830 confidence=0.8176095485687256 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=59330 end=59742 confidence=0.5843515396118164 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="No, I just wanted him to go for the regular classes and he's an eight year old child." start=59796 end=64398 confidence=0.5948308706283569 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='No regular classes.' start=64564 end=66042 confidence=0.740984320640564 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='No.' start=66106 end=66720 confidence=0.4936187267303467 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay, sir.' start=67890 end=69310 confidence=0.7134824395179749 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Thank you, sir.' start=69380 end=69934 confidence=0.8905314803123474 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Thank you.' start=69972 end=70220 confidence=0.8529648184776306 speaker='B' sentiment=<SentimentType.positive: 'POSITIVE'>

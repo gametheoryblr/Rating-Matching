@@ -9,3 +9,66 @@ B Send all the details in WhatsApp? If you don't mind.
 A I don't have option where I can send the details. However, I can take down your details from you. And I can send out an email. When are you planning to come? Any idea? You want to talk to someone and then confirm it? How is it?
 B I'll just confirm it because I won't.
 A Yeah. Do one thing, ma'am. Just talk to your. Confirm and confirm. You can call us back and let us know. Okay. Thank you. Thank you so much. Bye.
+A Good afternoon. Game theory. How may I help you today?
+B I just want to know regarding the swimming classes for adult.
+A Okay. Pardon, ma'am. Yeah, sure, ma'am. For which location are you looking for?
+B I need near to somewhere like BTM layout like that.
+A Yeah. We have branch and BTM. JP never. Also we have Basang goodi. Also we have Kadaspura and. Yeah. So five dancers. We have. So, ma'am, let me tell you. We are conducting Michael help swimming coaching classes. And the best part is we take only six people in the batch from the coach. And also I want to tell you that we have two program at the moment. One is a gold plan and silver. Gold plan is for 48 classes per wallet for six months. Amount is 17,999, ma'am. And also we have silver plan which is valid for two months. Okay. And the fees would be 11,999 for 24 classes.
+B Okay, ma'am.
+A If you want I can arrange a free trial class. Also you can come and watch. You can see the swimming pool. You can talk to the coach. I can do that. Also if you have can you please.
+B Send all the details in WhatsApp? If you don't mind.
+A I don't have option where I can send the details. However, I can take down your details from you. And I can send out an email. When are you planning to come? Any idea? You want to talk to someone and then confirm it? How is it?
+B I'll just confirm it because I won't.
+A Yeah. Do one thing, ma'am. Just talk to your. Confirm and confirm. You can call us back and let us know. Okay. Thank you. Thank you so much. Bye.
+text='Good afternoon.' start=1050 end=1642 confidence=0.7916819453239441 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Game theory.' start=1706 end=2266 confidence=0.6766630411148071 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='How may I help you today?' start=2298 end=3520 confidence=0.7350952625274658 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='I just want to know regarding the swimming classes for adult.' start=5090 end=10030 confidence=0.8268570899963379 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=10930 end=11390 confidence=0.5843515396118164 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="Pardon, ma'am." start=11460 end=12458 confidence=0.7548526525497437 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="Yeah, sure, ma'am." start=12554 end=13738 confidence=0.6204150915145874 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='For which location are you looking for?' start=13754 end=15520 confidence=0.899691641330719 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='I need near to somewhere like BTM layout like that.' start=17650 end=20974 confidence=0.6789107918739319 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah.' start=21092 end=21470 confidence=0.5491448640823364 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='We have branch and BTM.' start=21540 end=22778 confidence=0.830443263053894 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='JP never.' start=22794 end=23294 confidence=0.45341455936431885 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Also we have Basang goodi.' start=23332 end=24506 confidence=0.6915683150291443 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Also we have Kadaspura and.' start=24538 end=26662 confidence=0.8837609887123108 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah.' start=26796 end=27334 confidence=0.5491448640823364 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='So five dancers.' start=27452 end=28626 confidence=0.8521316647529602 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='We have.' start=28658 end=29110 confidence=0.6497658491134644 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="So, ma'am, let me tell you." start=29180 end=30694 confidence=0.8014320135116577 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='We are conducting Michael help swimming coaching classes.' start=30732 end=34722 confidence=0.8187151551246643 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='And the best part is we take only six people in the batch from the coach.' start=34866 end=39370 confidence=0.838805615901947 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='And also I want to tell you that we have two program at the moment.' start=41710 end=45882 confidence=0.8471854329109192 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='One is a gold plan and silver.' start=45936 end=47446 confidence=0.751086950302124 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Gold plan is for 48 classes per wallet for six months.' start=47558 end=52054 confidence=0.9310139417648315 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="Amount is 17,999, ma'am." start=52192 end=55034 confidence=0.8479198217391968 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='And also we have silver plan which is valid for two months.' start=55162 end=58318 confidence=0.7480950355529785 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Okay.' start=58404 end=58990 confidence=0.5843515396118164 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='And the fees would be 11,999 for 24 classes.' start=59140 end=64990 confidence=0.7213642001152039 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="Okay, ma'am." start=65570 end=67866 confidence=0.7152359485626221 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='If you want I can arrange a free trial class.' start=67898 end=69602 confidence=0.6932721138000488 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Also you can come and watch.' start=69656 end=70882 confidence=0.5089277625083923 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='You can see the swimming pool.' start=70936 end=72926 confidence=0.78913414478302 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='You can talk to the coach.' start=72958 end=74370 confidence=0.8223890066146851 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='I can do that.' start=74790 end=75554 confidence=0.6939041018486023 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Also if you have can you please send all the details in WhatsApp?' start=75592 end=80754 confidence=0.9060850739479065 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="If you don't mind." start=80802 end=81960 confidence=0.7426553964614868 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="I don't have option where I can send the details." start=82490 end=84818 confidence=0.5294808745384216 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='However, I can take down your details from you.' start=84914 end=88006 confidence=0.7473047971725464 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='And I can send out an email.' start=88028 end=89062 confidence=0.8015283346176147 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='When are you planning to come?' start=89116 end=90598 confidence=0.8995986580848694 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Any idea?' start=90764 end=91526 confidence=0.748300313949585 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='You want to talk to someone and then confirm it?' start=91628 end=94006 confidence=0.8800912499427795 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='How is it?' start=94028 end=94966 confidence=0.7343105673789978 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="I'll just confirm it because I won't." start=95148 end=98418 confidence=0.6220282316207886 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah.' start=98594 end=99030 confidence=0.5491448640823364 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="Do one thing, ma'am." start=99100 end=99898 confidence=0.764642596244812 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Just talk to your.' start=99954 end=100926 confidence=0.7825352549552917 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Confirm and confirm.' start=101028 end=102202 confidence=0.7708532810211182 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='You can call us back and let us know.' start=102266 end=103966 confidence=0.8510113954544067 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=104068 end=104478 confidence=0.5843515396118164 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Thank you.' start=104564 end=105294 confidence=0.8529646396636963 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Thank you so much.' start=105412 end=106560 confidence=0.9793016910552979 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Bye.' start=108130 end=108410 confidence=0.5137449502944946 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>

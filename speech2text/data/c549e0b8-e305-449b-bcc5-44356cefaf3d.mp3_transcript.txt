@@ -9,3 +9,35 @@ B Request we have taken.
 A We have sent it to the concerned location and they'll have the list. Okay. So you can directly walk in this.
 B Okay, cool.
 A Thank you. Thank you. You're welcome. Bye.
+A Good afternoon.
+B Welcome to Mc.
+A How may I help you today?
+B Hello. Hi. I had an appointment today for, like, a free trial. Okay. In the name of Craig Jan. Can you just check and let me know.
+A Sir? You can walk in directly, sir. If the appointment scheduled, fixed for free trial, you can go directly, sir.
+B Okay. The appointment is.
+A In six. Yeah. Which means whatever.
+B Request we have taken.
+A We have sent it to the concerned location and they'll have the list. Okay. So you can directly walk in this.
+B Okay, cool.
+A Thank you. Thank you. You're welcome. Bye.
+text='Good afternoon.' start=1210 end=1802 confidence=0.7916816473007202 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Welcome to Mc.' start=1866 end=2810 confidence=0.7283405065536499 speaker='B' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='How may I help you today?' start=2890 end=4080 confidence=0.7350953817367554 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Hello.' start=4450 end=5150 confidence=0.5208578705787659 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Hi.' start=5300 end=5710 confidence=0.5325648188591003 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='I had an appointment today for, like, a free trial.' start=5780 end=8858 confidence=0.8658503293991089 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=9034 end=9760 confidence=0.5843517780303955 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='In the name of Craig Jan. Can you just check and let me know, sir?' start=10450 end=15086 confidence=0.9048774242401123 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='You can walk in directly, sir.' start=15108 end=16206 confidence=0.8265238404273987 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='If the appointment scheduled, fixed for free trial, you can go directly, sir.' start=16228 end=19920 confidence=0.8140767216682434 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=20290 end=20798 confidence=0.5843517780303955 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='The appointment is in six.' start=20884 end=22880 confidence=0.8721309304237366 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah.' start=23250 end=23614 confidence=0.5491448640823364 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="Which means whatever request we have taken, we have sent it to the concerned location and they'll have the list." start=23652 end=28918 confidence=0.9103139638900757 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=29004 end=29494 confidence=0.5843517780303955 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='So you can directly walk in this.' start=29612 end=31430 confidence=0.8178618550300598 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay, cool.' start=31580 end=33000 confidence=0.8488619923591614 speaker='B' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Thank you.' start=33450 end=33974 confidence=0.8529648184776306 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Thank you.' start=34012 end=34374 confidence=0.8529648184776306 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text="You're welcome." start=34412 end=35240 confidence=0.9098549485206604 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Bye.' start=36570 end=36930 confidence=0.5137450695037842 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>

@@ -49,3 +49,109 @@ D Thank you.
 F Sorry about it, but I'll look into it.
 E Thank you so much.
 G Thank you. Bye.
+A Again.
+B David.
+C Hi.
+D I want to schedule a trial class.
+E For my five year old boy for swimming.
+F Which location?
+G Okay, can I have your name again?
+E Neha.
+H Katrina.
+F Okay, I think I've spoken to you.
+C Yes.
+F When do you want to have it?
+H Can I have it today?
+B Today?
+F Yeah, I can do it.
+E Yes. So today, four to five?
+B Yeah.
+G Can I have your email ID?
+D N E W h a.
+B Yes.
+H A p r I. Kapri.
+B Okay.
+E At the read@gmail.com.
+C Okay.
+F Today at 04:00 p.m..
+I Yes.
+H Is it Lilith?
+F Yes.
+E Okay. Hi.
+F Yes.
+D So last time we booked it, we couldn't make it. So we'll be coming today.
+F Okay, fine.
+B No problem.
+F I'll reschedule it.
+B Okay.
+H Yes, thank you.
+E This is a free trial class, right?
+F Yes, it's a free trial.
+I Okay.
+D Also, yesterday I spoke to somebody in the evening and I don't know, that person was very reluctant to schedule a visit for me. I mean, he was like, we need the details, and then we'll forward it to the team and then we'll get back to you.
+H Something like that.
+E It was very unprofessional of him to do that.
+F Okay, let me just check. I'll check his recording and I will get.
+D I'm not able to recall the name of the person, but he was.
+A No worries.
+G I'll have it checked in my system.
+F Yes, I'll take a call on this.
+D Thank you.
+F Sorry about it, but I'll look into it.
+E Thank you so much.
+G Thank you. Bye.
+text='Again.' start=1930 end=2142 confidence=0.4667980670928955 speaker='A' sentiment=<SentimentType.negative: 'NEGATIVE'>
+text='David.' start=2196 end=3070 confidence=0.6708123683929443 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Hi.' start=3970 end=4720 confidence=0.5325648188591003 speaker='C' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='I want to schedule a trial class for my five year old boy for swimming.' start=5330 end=11150 confidence=0.6313994526863098 speaker='E' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Which location?' start=11890 end=13150 confidence=0.8242824673652649 speaker='F' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay, can I have your name again?' start=16210 end=19120 confidence=0.8499420881271362 speaker='G' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Neha.' start=19970 end=20538 confidence=0.6394645571708679 speaker='E' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Katrina.' start=20554 end=21550 confidence=0.8181178569793701 speaker='H' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="Okay, I think I've spoken to you." start=22290 end=24480 confidence=0.8558363318443298 speaker='F' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yes.' start=25050 end=25800 confidence=0.461038738489151 speaker='C' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='When do you want to have it?' start=28090 end=29880 confidence=0.8486967086791992 speaker='F' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Can I have it today?' start=30250 end=31720 confidence=0.8862015008926392 speaker='H' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Today?' start=33370 end=33830 confidence=0.8016930818557739 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah, I can do it.' start=33900 end=35720 confidence=0.8797501921653748 speaker='F' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Yes.' start=36090 end=36598 confidence=0.461038738489151 speaker='E' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='So today, four to five?' start=36684 end=38220 confidence=0.9147363305091858 speaker='E' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah.' start=38670 end=39420 confidence=0.5491448640823364 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Can I have your email ID?' start=40190 end=41980 confidence=0.8925800323486328 speaker='G' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='N E W h a.' start=42750 end=44460 confidence=0.6324676275253296 speaker='D' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yes.' start=46590 end=47340 confidence=0.461038738489151 speaker='B' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='A p r I. Kapri.' start=51950 end=53530 confidence=0.7778797149658203 speaker='H' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=54030 end=54874 confidence=0.5843515396118164 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='At the read@gmail.com okay.' start=55072 end=59230 confidence=0.6413588523864746 speaker='E' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Today at 04:00 p.m..' start=59300 end=60974 confidence=0.9210718870162964 speaker='F' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yes.' start=61172 end=61678 confidence=0.461038738489151 speaker='I' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Is it Lilith?' start=61764 end=62982 confidence=0.8648316860198975 speaker='H' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yes.' start=63146 end=63860 confidence=0.461038738489151 speaker='F' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Okay.' start=64390 end=64802 confidence=0.5843515396118164 speaker='E' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Hi.' start=64856 end=65460 confidence=0.5325648188591003 speaker='E' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yes.' start=66950 end=67458 confidence=0.461038738489151 speaker='F' sentiment=<SentimentType.positive: 'POSITIVE'>
+text="So last time we booked it, we couldn't make it." start=67544 end=70914 confidence=0.752164900302887 speaker='D' sentiment=<SentimentType.negative: 'NEGATIVE'>
+text="So we'll be coming today." start=70952 end=72820 confidence=0.80973219871521 speaker='D' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay, fine.' start=73190 end=73970 confidence=0.5716367959976196 speaker='F' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='No problem.' start=74040 end=74878 confidence=0.6486828327178955 speaker='B' sentiment=<SentimentType.positive: 'POSITIVE'>
+text="I'll reschedule it." start=75064 end=76678 confidence=0.8325568437576294 speaker='F' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=76764 end=77254 confidence=0.5843515396118164 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yes, thank you.' start=77372 end=78680 confidence=0.8994645476341248 speaker='H' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='This is a free trial class, right?' start=79050 end=80982 confidence=0.8224204778671265 speaker='E' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="Yes, it's a free trial." start=81036 end=82790 confidence=0.589481770992279 speaker='F' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Okay.' start=83530 end=84182 confidence=0.5843515396118164 speaker='I' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="Also, yesterday I spoke to somebody in the evening and I don't know, that person was very reluctant to schedule a visit for me." start=84316 end=94266 confidence=0.7886103987693787 speaker='D' sentiment=<SentimentType.negative: 'NEGATIVE'>
+text="I mean, he was like, we need the details, and then we'll forward it to the team and then we'll get back to you." start=94368 end=99754 confidence=0.870061993598938 speaker='D' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Something like that.' start=99792 end=100426 confidence=0.789591908454895 speaker='H' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='It was very unprofessional of him to do that.' start=100448 end=103440 confidence=0.9419110417366028 speaker='E' sentiment=<SentimentType.negative: 'NEGATIVE'>
+text='Okay, let me just check.' start=103890 end=105374 confidence=0.6992039084434509 speaker='F' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="I'll check his recording and I will get." start=105412 end=108160 confidence=0.848883330821991 speaker='F' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="I'm not able to recall the name of the person, but he was." start=110210 end=113070 confidence=0.8251190781593323 speaker='D' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='No worries.' start=113140 end=113642 confidence=0.6180508136749268 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text="I'll have it checked in my system." start=113706 end=115440 confidence=0.7732375264167786 speaker='G' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="Yes, I'll take a call on this." start=115810 end=118480 confidence=0.5078778266906738 speaker='F' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Thank you.' start=119170 end=119614 confidence=0.8529646396636963 speaker='D' sentiment=<SentimentType.positive: 'POSITIVE'>
+text="Sorry about it, but I'll look into it." start=119652 end=122606 confidence=0.5848097205162048 speaker='F' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Thank you so much.' start=122788 end=123790 confidence=0.9793016910552979 speaker='E' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Thank you.' start=123860 end=124382 confidence=0.8529646396636963 speaker='G' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Bye.' start=124436 end=124666 confidence=0.5137449502944946 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>

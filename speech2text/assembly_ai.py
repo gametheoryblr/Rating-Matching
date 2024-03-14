@@ -10,7 +10,10 @@ transcriber = aai.Transcriber()
 for file in os.listdir('./data'):
     if file.endswith('.mp3'):
         audio = "./data/"+file
-        config = aai.TranscriptionConfig(speaker_labels=True)
+        config = aai.TranscriptionConfig(
+            sentiment_analysis=True,
+            speaker_labels=True
+        )
 
         transcriber = aai.Transcriber()
         transcript = transcriber.transcribe(
@@ -21,6 +24,9 @@ for file in os.listdir('./data'):
         for utterance in transcript.utterances:
             string= string + utterance.speaker + " " + utterance.text + "\n"
 
+        for sentiment_result in transcript.sentiment_analysis:
+            string += str(sentiment_result) + "\n"
+        
         with open(f"{audio}_transcript.txt", 'a') as f:
             f.write(string)
             f.close()

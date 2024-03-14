@@ -39,3 +39,167 @@ B Okay.
 A Ms. Manita, I have taken the detail. I've passed into my details to my colleague. They will call you and update you.
 B Okay, sure. Thank you.
 A Thank you so much. It was nice talking to you. Bye.
+A Good morning. How may I help you today?
+B Yeah, I'm looking for swimming classes for my son.
+A What is the age, ma'am?
+B Four years.
+A Four years. Okay. And yes. For which location, ma'am?
+B The one in ten brook.
+A Ten brook. Where is this the.
+B I saw your pamphlet somewhere.
+A We have five locations. Gagdaspura. We have BTM. We have JP Bassonry. We have, ma'am. Definitely we have. And let me tell you the plan. The plan is for starting from the kids nine months to 3.5 years. Okay. The fees is 5000 and 999.
+B But he is number, is it okay.
+A Yeah, that's fine. Nine months to 3.5 years. That's the bracket for the kids. Okay. Only for kids. And this is for one month. Validity. That is for eight classes only on weekends. And duration of each session is 30 minutes. Okay. We don't have any trial classes, ma'am. You can come and observe it if you want to see it. But however, it's basically what we're trying to do in this program is. Our program is designed to help toddler builder to build confidence for the kids. Instructors are trained to work children's and parents to different comfort level. Helping to overcome fear. Okay. And basically what we do try to teach kids in this toddler session is basically it is a water safety skill. Like floating, kicking in the water. Arm movement, breath control and other foundation skim swimming skill based on the agent ability. Okay. So ma'am, I can take some details so that I can pass on to my colleague who would be handling this for specially kids. Can you please send me your name?
+B Yeah.
+A One. Dita. Okay. Your kid's name?
+B Vivan.
+A Vivan. V I V A N. Yeah.
+B Vanv.
+A One. Okay. And what's the age? You said five years. Four years. Four years. Okay. And location? You said busan. Goody. Right?
+B Yeah.
+A Bastard. And ma'am, your email address. I can send.
+B Jazz.
+A J A S. J A. J A S.
+B Bandita.
+A B a n v a n d.
+B I t h a. Yeah, but bhatpath. Okay@gmail.com. Gmail.
+A Okay.
+B And what are the batch timings like? You have anything coming up?
+A Timings. We have 09:00. 930. 10:00. 1030. 11:00 and last batch would be? 330.
+B Last. Okay. 09:00. You have 9930.
+A Yeah. 930. We have batch.
+B Okay. In the month of April you have.
+A Yes, ma'am. We started for Basanguri already. Batches are going on at the moment.
+B Okay, but how do you calculate the number of classes? Like as in the batch?
+A Yeah. Once you join, they have a batch of six people along with you. So you, parents and the kid has to enroll, has to enter in the water. They will tell you the schedule, calendar, which are the dates, what are the timings and everything. Don't need to worry about that. Okay.
+B I can start whenever, right? Like, what I'm asking you is I can start mid of second. April also.
+A Yeah. And you came to know this through ad or how, ma'am? Through website.
+B Yeah. Instagram.
+A Okay, wonderful. No problem.
+B Okay.
+A Ms. Manita, I have taken the detail. I've passed into my details to my colleague. They will call you and update you.
+B Okay, sure. Thank you.
+A Thank you so much. It was nice talking to you. Bye.
+text='Good morning.' start=1610 end=2400 confidence=0.7193593978881836 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='How may I help you today?' start=3730 end=5214 confidence=0.7350950837135315 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="Yeah, I'm looking for swimming classes for my son." start=5412 end=9280 confidence=0.6471707820892334 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="What is the age, ma'am?" start=10290 end=11722 confidence=0.8536931872367859 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Four years.' start=11866 end=12926 confidence=0.6104831695556641 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Four years.' start=13108 end=13870 confidence=0.6104831695556641 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=13940 end=14414 confidence=0.584351658821106 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='And yes.' start=14532 end=15758 confidence=0.5115854144096375 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="For which location, ma'am?" start=15844 end=17390 confidence=0.8754794001579285 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='The one in ten brook.' start=18690 end=21070 confidence=0.806265652179718 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Ten brook.' start=21810 end=22634 confidence=0.7573859095573425 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Where is this the.' start=22682 end=25542 confidence=0.6066336631774902 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='I saw your pamphlet somewhere.' start=25676 end=27986 confidence=0.7980426549911499 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='We have five locations.' start=28098 end=29394 confidence=0.8023053407669067 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Gagdaspura.' start=29522 end=30418 confidence=0.6985281705856323 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='We have BTM.' start=30434 end=31346 confidence=0.7129409909248352 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='We have JP Bassonry.' start=31378 end=33906 confidence=0.8448125720024109 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="We have, ma'am." start=33938 end=34466 confidence=0.7555505633354187 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Definitely we have.' start=34498 end=35720 confidence=0.5332968235015869 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='And let me tell you the plan.' start=36410 end=38038 confidence=0.7840113639831543 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='The plan is for starting from the kids nine months to 3.5 years.' start=38124 end=42378 confidence=0.9203211665153503 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=42464 end=43098 confidence=0.584351658821106 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='The fees is 5000 and 999.' start=43264 end=45674 confidence=0.7478451728820801 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='But he is number, is it okay.' start=45712 end=48700 confidence=0.7678462266921997 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="Yeah, that's fine." start=49150 end=50122 confidence=0.6754952073097229 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Nine months to 3.5 years.' start=50176 end=51694 confidence=0.8299658894538879 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="That's the bracket for the kids." start=51732 end=53710 confidence=0.8095027208328247 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=53780 end=54350 confidence=0.584351658821106 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Only for kids.' start=54500 end=55582 confidence=0.7011542916297913 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='And this is for one month.' start=55716 end=56894 confidence=0.7695931792259216 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Validity.' start=56932 end=57402 confidence=0.5946033596992493 speaker='A' sentiment=<SentimentType.negative: 'NEGATIVE'>
+text='That is for eight classes only on weekends.' start=57466 end=60190 confidence=0.8808481693267822 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='And duration of each session is 30 minutes.' start=60610 end=63886 confidence=0.9073036313056946 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=63988 end=64542 confidence=0.584351658821106 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="We don't have any trial classes, ma'am." start=64676 end=66634 confidence=0.6795169115066528 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='You can come and observe it if you want to see it.' start=66682 end=69186 confidence=0.6888143420219421 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="But however, it's basically what we're trying to do in this program is." start=69288 end=73170 confidence=0.8492208123207092 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Our program is designed to help toddler builder to build confidence for the kids.' start=73320 end=77940 confidence=0.7988428473472595 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text="Instructors are trained to work children's and parents to different comfort level." start=79450 end=84118 confidence=0.7919744849205017 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Helping to overcome fear.' start=84204 end=86050 confidence=0.6232423782348633 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=86130 end=86662 confidence=0.584351658821106 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='And basically what we do try to teach kids in this toddler session is basically it is a water safety skill.' start=86796 end=94166 confidence=0.8195521235466003 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Like floating, kicking in the water.' start=94278 end=96954 confidence=0.7812848687171936 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Arm movement, breath control and other foundation skim swimming skill based on the agent ability.' start=97072 end=103306 confidence=0.9085079431533813 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=103418 end=104126 confidence=0.584351658821106 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="So ma'am, I can take some details so that I can pass on to my colleague who would be handling this for specially kids." start=104308 end=111600 confidence=0.900053083896637 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Can you please send me your name?' start=112210 end=114030 confidence=0.8720788955688477 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah, one.' start=114180 end=118962 confidence=0.5768082141876221 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Dita.' start=119016 end=119650 confidence=0.5509064197540283 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=120470 end=120882 confidence=0.584351658821106 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="Your kid's name?" start=120936 end=122100 confidence=0.775075376033783 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Vivan.' start=122550 end=123570 confidence=0.6596912741661072 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Vivan.' start=124070 end=125090 confidence=0.6596912741661072 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='V I V A N. Yeah.' start=125530 end=128822 confidence=0.6703959107398987 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Vanv one.' start=128876 end=135910 confidence=0.6239556074142456 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=135980 end=136550 confidence=0.584351658821106 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="And what's the age?" start=136700 end=137894 confidence=0.8203125596046448 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='You said five years.' start=137932 end=139618 confidence=0.692747175693512 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Four years.' start=139724 end=140540 confidence=0.6104831695556641 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Four years.' start=140910 end=141530 confidence=0.6104831695556641 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=141600 end=142026 confidence=0.584351658821106 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='And location?' start=142128 end=142854 confidence=0.8294403553009033 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='You said busan.' start=142902 end=143798 confidence=0.763477087020874 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Goody.' start=143814 end=144166 confidence=0.5275378823280334 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Right?' start=144198 end=144586 confidence=0.7360090017318726 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah.' start=144688 end=145434 confidence=0.5491447448730469 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Bastard.' start=145632 end=146582 confidence=0.9004213213920593 speaker='A' sentiment=<SentimentType.negative: 'NEGATIVE'>
+text="And ma'am, your email address." start=146726 end=148906 confidence=0.7798529267311096 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='I can send.' start=149088 end=149770 confidence=0.7401522397994995 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Jazz.' start=149840 end=150214 confidence=0.7941450476646423 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='J A S. J A. J A S. Bandita.' start=150262 end=158534 confidence=0.8426850438117981 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='B a n v a n d I t h a. Yeah, but bhatpath.' start=158582 end=166098 confidence=0.6434776782989502 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay@gmail.com.' start=166184 end=167634 confidence=0.7916184663772583 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Gmail.' start=167672 end=169730 confidence=0.6441846489906311 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=171190 end=171940 confidence=0.584351658821106 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='And what are the batch timings like?' start=172310 end=175278 confidence=0.8983975052833557 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='You have anything coming up?' start=175304 end=176726 confidence=0.8583522439002991 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Timings.' start=176908 end=177394 confidence=0.7024175524711609 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='We have 09:00.' start=177442 end=178354 confidence=0.8522091507911682 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='930.' start=178402 end=178950 confidence=0.6953980326652527 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='10:00.' start=179020 end=179682 confidence=0.6644085049629211 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='1030.' start=179746 end=180262 confidence=0.612072229385376 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='11:00 and last batch would be?' start=180316 end=181846 confidence=0.9316425323486328 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='330.' start=181868 end=182760 confidence=0.6514132618904114 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Last.' start=184010 end=184760 confidence=0.6001259684562683 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=186330 end=186790 confidence=0.584351658821106 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='09:00.' start=186860 end=187586 confidence=0.6380528807640076 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='You have 9930.' start=187618 end=188978 confidence=0.806479811668396 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah.' start=189084 end=189306 confidence=0.5491447448730469 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='930.' start=189328 end=189802 confidence=0.6953980326652527 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='We have batch.' start=189856 end=190566 confidence=0.7884490489959717 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=190678 end=191002 confidence=0.584351658821106 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='In the month of April you have.' start=191056 end=193100 confidence=0.8648253679275513 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="Yes, ma'am." start=193630 end=194518 confidence=0.5793381333351135 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='We started for Basanguri already.' start=194614 end=196890 confidence=0.8650892972946167 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Batches are going on at the moment.' start=197040 end=198890 confidence=0.8486020565032959 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay, but how do you calculate the number of classes?' start=199040 end=202454 confidence=0.7670741677284241 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Like as in the batch?' start=202502 end=205274 confidence=0.8523966670036316 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah.' start=205322 end=205486 confidence=0.5491447448730469 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Once you join, they have a batch of six people along with you.' start=205508 end=208574 confidence=0.9112352728843689 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='So you, parents and the kid has to enroll, has to enter in the water.' start=208692 end=212030 confidence=0.8106399178504944 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='They will tell you the schedule, calendar, which are the dates, what are the timings and everything.' start=212100 end=216590 confidence=0.8570408821105957 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="Don't need to worry about that." start=216660 end=217998 confidence=0.48969119787216187 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=218084 end=218814 confidence=0.584351658821106 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='I can start whenever, right?' start=219012 end=220366 confidence=0.7582069039344788 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="Like, what I'm asking you is I can start mid of second." start=220388 end=222862 confidence=0.8537523746490479 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='April also.' start=222916 end=223822 confidence=0.8368472456932068 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah.' start=223956 end=224640 confidence=0.5491447448730469 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="And you came to know this through ad or how, ma'am?" start=228890 end=231554 confidence=0.8190796971321106 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Through website.' start=231602 end=232614 confidence=0.819259762763977 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah.' start=232812 end=233222 confidence=0.5491447448730469 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Instagram.' start=233276 end=234150 confidence=0.7232832908630371 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay, wonderful.' start=236490 end=237362 confidence=0.9311078786849976 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='No problem.' start=237426 end=238150 confidence=0.6486831307411194 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Okay.' start=238300 end=238614 confidence=0.584351658821106 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Ms. Manita, I have taken the detail.' start=238652 end=240182 confidence=0.8700370192527771 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="I've passed into my details to my colleague." start=240236 end=242146 confidence=0.8764914870262146 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='They will call you and update you.' start=242178 end=243494 confidence=0.8812451958656311 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay, sure.' start=243612 end=244262 confidence=0.5148755311965942 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Thank you.' start=244316 end=244646 confidence=0.8529649376869202 speaker='B' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Thank you so much.' start=244668 end=245366 confidence=0.9793016910552979 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='It was nice talking to you.' start=245388 end=246406 confidence=0.9691449999809265 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Bye.' start=246428 end=246578 confidence=0.5137446522712708 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>

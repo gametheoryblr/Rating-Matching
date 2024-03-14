@@ -46,3 +46,132 @@ B All right.
 A Okay. Yeah. Thank you.
 C Thank you.
 A Thank you. Bye.
+A Good morning. Game theory.
+B Yeah. Hello.
+A Yes.
+B Yeah, I wanted to inquire about your badminton coaching, actually. Do I provide coaching?
+A Yes, we do. Which location?
+B Kargaspura.
+A Kaggaspura. Okay. I'll tell you the details. We have classes all days of the week except Friday.
+C Okay.
+A And batches are in the morning at seven and evening. Six and seven for adults.
+C Okay.
+A Yeah.
+B And what is the rate?
+A I'll tell you. So what we first would like to do is we would like to invite you for a free trial class. In the free trial class, you'll get to know the methodology of the coaches teaching. We have two plans. One is the one month plan wherein you can take three days a week. Twelve classes a month. And the pricing is four. Triple nine.
+C Okay.
+A And if you're looking for it on a long term basis, it's 36 classes for three months.
+C Okay.
+A Again. Twelve classes a month. And that is 10,500.
+B Got it.
+C Sorry.
+B What?
+A Your name. I forgot to ask your name. Okay.
+C Yeah.
+B These classes are group classes, right? Or individual classes?
+A No, group classes. The ratio is to one is to five.
+C Okay, perfect.
+A So you would like to have a trial class?
+C Yeah.
+A When would you like to have it?
+B Today. I'm free today, so we can do it today.
+A Today is 06:00 p.m. 1 minute. Let me just check.
+C It.
+A One moment. I'll just check. The availability is fine. Today.
+B Yeah.
+A 05:00 p.m.. Okay, fine. I'll schedule it. Harsh. I'll require your email ID so you'll receive a calendar invite with details.
+B Yeah, it is harsh.
+A H R S H. Yes.
+B P a n. C h o l.
+A I. P a n T. H o.
+B L I. P a n. C h o l I.
+C Okay.
+A C H o l I. Yeah.
+B Eight, nine, six. At the rate@gmail.com.
+A At Gmail. Okay. It's confirmed for 05:00 p.m. Today at Kabdaspura.
+C Okay.
+B All right.
+A Okay. Yeah. Thank you.
+C Thank you.
+A Thank you. Bye.
+text='Good morning.' start=1290 end=1662 confidence=0.7193593382835388 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Game theory.' start=1716 end=2670 confidence=0.6766630411148071 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah.' start=3010 end=3470 confidence=0.5491448640823364 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Hello.' start=3540 end=4206 confidence=0.5208578705787659 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yes.' start=4388 end=5166 confidence=0.46103882789611816 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Yeah, I wanted to inquire about your badminton coaching, actually.' start=5348 end=10606 confidence=0.8608378171920776 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Do I provide coaching?' start=10708 end=12350 confidence=0.9040400981903076 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yes, we do.' start=12850 end=13566 confidence=0.5212453007698059 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Which location?' start=13588 end=14590 confidence=0.8242825269699097 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Kargaspura.' start=15650 end=16986 confidence=0.5963616371154785 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Kaggaspura.' start=17098 end=18154 confidence=0.6993222236633301 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=18202 end=18414 confidence=0.5843515396118164 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="I'll tell you the details." start=18452 end=20110 confidence=0.8128617405891418 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='We have classes all days of the week except Friday.' start=21810 end=25906 confidence=0.8090831637382507 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=26098 end=26742 confidence=0.5843515396118164 speaker='C' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='And batches are in the morning at seven and evening.' start=26876 end=31910 confidence=0.9149529337882996 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Six and seven for adults.' start=32490 end=35906 confidence=0.8777211308479309 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=36098 end=36840 confidence=0.5843515396118164 speaker='C' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah.' start=38970 end=39720 confidence=0.5491448640823364 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='And what is the rate?' start=40890 end=42620 confidence=0.7871302962303162 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="I'll tell you." start=44430 end=45386 confidence=0.6023450493812561 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='So what we first would like to do is we would like to invite you for a free trial class.' start=45488 end=50880 confidence=0.5300528407096863 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="In the free trial class, you'll get to know the methodology of the coaches teaching." start=51490 end=58030 confidence=0.8806926608085632 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='We have two plans.' start=58690 end=61482 confidence=0.8206902146339417 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='One is the one month plan wherein you can take three days a week.' start=61546 end=68180 confidence=0.898701548576355 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Twelve classes a month.' start=68790 end=70674 confidence=0.8251688480377197 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='And the pricing is four.' start=70872 end=72562 confidence=0.7198888063430786 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Triple nine.' start=72616 end=73620 confidence=0.8309521079063416 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=74310 end=75060 confidence=0.5843515396118164 speaker='C' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="And if you're looking for it on a long term basis, it's 36 classes for three months." start=75450 end=84920 confidence=0.8272218108177185 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=85690 end=86150 confidence=0.5843515396118164 speaker='C' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Again.' start=86220 end=86502 confidence=0.46679797768592834 speaker='A' sentiment=<SentimentType.negative: 'NEGATIVE'>
+text='Twelve classes a month.' start=86556 end=88090 confidence=0.8251688480377197 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='And that is 10,500.' start=88160 end=90860 confidence=0.7720564603805542 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Got it.' start=92030 end=93020 confidence=0.5088187456130981 speaker='B' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Sorry.' start=95230 end=95642 confidence=0.5092124342918396 speaker='C' sentiment=<SentimentType.negative: 'NEGATIVE'>
+text='What?' start=95696 end=96202 confidence=0.56528639793396 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Your name.' start=96336 end=96874 confidence=0.6394817233085632 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='I forgot to ask your name.' start=96912 end=99020 confidence=0.5160524845123291 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=99470 end=100278 confidence=0.5843515396118164 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah.' start=100464 end=101150 confidence=0.5491448640823364 speaker='C' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='These classes are group classes, right?' start=101300 end=102846 confidence=0.7865186333656311 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Or individual classes?' start=102868 end=104266 confidence=0.8442386984825134 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='No, group classes.' start=104378 end=105722 confidence=0.6665852069854736 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='The ratio is to one is to five.' start=105786 end=110800 confidence=0.844228208065033 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay, perfect.' start=111490 end=113300 confidence=0.8497672080993652 speaker='C' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='So you would like to have a trial class?' start=115750 end=117860 confidence=0.9164801836013794 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah.' start=118310 end=119060 confidence=0.5491448640823364 speaker='C' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='When would you like to have it?' start=119750 end=121620 confidence=0.8697252869606018 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Today.' start=123030 end=123778 confidence=0.7106252312660217 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="I'm free today, so we can do it today." start=123944 end=126146 confidence=0.9371913075447083 speaker='B' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Today is 06:00 p.m. 1 minute.' start=126248 end=128002 confidence=0.89947110414505 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Let me just check it.' start=128066 end=139134 confidence=0.7397889494895935 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='One moment.' start=139252 end=139870 confidence=0.6758934259414673 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="I'll just check." start=139940 end=140514 confidence=0.7041886448860168 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='The availability is fine.' start=140552 end=155534 confidence=0.6833275556564331 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Today.' start=155572 end=156160 confidence=0.7106252312660217 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah.' start=157090 end=157886 confidence=0.5491448640823364 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='05:00 p.m..' start=158068 end=159278 confidence=0.8136011958122253 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay, fine.' start=159444 end=160286 confidence=0.5716304183006287 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="I'll schedule it." start=160388 end=161550 confidence=0.7156371474266052 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Harsh.' start=161620 end=161946 confidence=0.5812684893608093 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="I'll require your email ID so you'll receive a calendar invite with details." start=161978 end=167066 confidence=0.9114481806755066 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah, it is harsh.' start=167258 end=169402 confidence=0.7123692035675049 speaker='B' sentiment=<SentimentType.negative: 'NEGATIVE'>
+text='H R S H. Yes.' start=169466 end=171886 confidence=0.6423267126083374 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='P a n. C h o l I. P a n T. H o l I. P a n. C h o l I.' start=171988 end=181046 confidence=0.5570392608642578 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=181228 end=181622 confidence=0.5843515396118164 speaker='C' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='C H o l I. Yeah.' start=181676 end=183526 confidence=0.5878239274024963 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Eight, nine, six.' start=183708 end=184902 confidence=0.6995787024497986 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='At the rate@gmail.com.' start=184956 end=186600 confidence=0.8456078767776489 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='At Gmail.' start=187530 end=188482 confidence=0.7560637593269348 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=188546 end=188774 confidence=0.5843515396118164 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text="It's confirmed for 05:00 p.m. Today at Kabdaspura." start=188812 end=193058 confidence=0.8889697790145874 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=193234 end=193670 confidence=0.5843515396118164 speaker='C' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='All right.' start=193740 end=194230 confidence=0.48966991901397705 speaker='B' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Okay.' start=194300 end=194630 confidence=0.5843515396118164 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Yeah.' start=194700 end=195078 confidence=0.5491448640823364 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
+text='Thank you.' start=195164 end=195622 confidence=0.8529649972915649 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Thank you.' start=195676 end=196102 confidence=0.8529649972915649 speaker='C' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Thank you.' start=196156 end=196920 confidence=0.8529649972915649 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
+text='Bye.' start=198890 end=199250 confidence=0.5137449502944946 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
