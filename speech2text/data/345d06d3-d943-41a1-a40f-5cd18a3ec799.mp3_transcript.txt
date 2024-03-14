@@ -1,9 +1,0 @@
-A Maria. Hello? The person you are speaking with has put your call on hold. Please stay on the line. Niu matanadu tirua vektiyu Nimbakari. And say bhatkarahi. Hello.
-A Maria. Hello? The person you are speaking with has put your call on hold. Please stay on the line. Niu matanadu tirua vektiyu Nimbakari. And say bhatkarahi. Hello.
-text='Maria.' start=490 end=1230 confidence=0.6197267770767212 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
-text='Hello?' start=2370 end=3120 confidence=0.6430091261863708 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
-text='The person you are speaking with has put your call on hold.' start=8930 end=13102 confidence=0.5093117952346802 speaker='A' sentiment=<SentimentType.negative: 'NEGATIVE'>
-text='Please stay on the line.' start=13236 end=14960 confidence=0.7910244464874268 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
-text='Niu matanadu tirua vektiyu Nimbakari.' start=15410 end=18586 confidence=0.7215016484260559 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
-text='And say bhatkarahi.' start=18618 end=26630 confidence=0.7499911189079285 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
-text='Hello.' start=30090 end=30340 confidence=0.5208579301834106 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>

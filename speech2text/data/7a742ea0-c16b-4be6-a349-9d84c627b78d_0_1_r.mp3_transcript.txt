@@ -1,5 +1,0 @@
-A Do bajai kahi kabura hello? Yes. Bye.
-A Do bajai kahi kabura hello? Yes. Bye.
-text='Do bajai kahi kabura hello?' start=7610 end=17040 confidence=0.8829444646835327 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
-text='Yes.' start=27180 end=27930 confidence=0.46103882789611816 speaker='A' sentiment=<SentimentType.positive: 'POSITIVE'>
-text='Bye.' start=29100 end=29460 confidence=0.5137449502944946 speaker='A' sentiment=<SentimentType.neutral: 'NEUTRAL'>
